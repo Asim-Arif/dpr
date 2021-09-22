@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:background="@color/background"
+    >
+    <include layout="@layout/title_bar" />
+
+    <TextView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        android:text="SQL Server IP"
+        />
+    <EditText
+        android:id="@+id/txtSQLIP"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:textAlignment="textStart"
+        android:textSize="16sp"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        android:text="SQL Server Port"
+        />
+    <EditText
+        android:id="@+id/txtSQLPort"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <Button
+        android:id="@+id/cmdUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Update"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        />
+    <Button
+        android:id="@+id/cmdCancel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Cancel"
+        android:layout_marginTop="10dp"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

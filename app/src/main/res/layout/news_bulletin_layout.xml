@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/background"
+    android:weightSum="2"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="2"
+
+        >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/txtNB_IssNo"
+            android:textAlignment="textStart"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+
+            />
+        <ImageButton
+            android:id="@+id/ImgNB"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:src="@drawable/settings_dots"
+            android:background="@drawable/button_transparent"
+
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/txtNB_Remarks"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:maxLines="1"
+
+        />
+
+</LinearLayout>

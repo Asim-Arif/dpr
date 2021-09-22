@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="background">#FFFFFF</color>
+    <color name="button_background">#1093F5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="spinner_item_backgroud">#3A5F4D</color>
+    <color name="red">#F6402C</color>
+    <color name="blue">#1093F5</color>
+    <color name="light_blue">#00A6F6</color>
+    <color name="green">#46AF4A</color>
+    <color name="deep_orange">#FF5505</color>
+    <color name="grey">#D3D3D3</color>
+    <color name="pink">#FFC0CB</color>
+
+    <color name="colorBlack">#000</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorAccent">#383838</color>
+    <color name="colorPrimary">#b60000</color>
+    <color name="colorPrimaryDark">#9e0000</color>
+</resources>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:weightSum="11.2"
+    >
+    <include layout="@layout/title_bar" />
+    <Button
+        android:id="@+id/cmdIss_Date"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:text="Date"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/lblIss_LotNo"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/button_background"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="Lot No."
+            />
+        <EditText
+            android:id="@+id/txtIss_LotNo"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/white"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/cmbIss_Process"
+
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/button_background"
+        android:textAlignment="center"
+        />
+    <Spinner
+        android:id="@+id/cmbIss_Vendor"
+
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/button_background"
+        android:textAlignment="center"
+        />
+    <Spinner
+        android:id="@+id/cmbIss_Item"
+
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/button_background"
+        android:textAlignment="center"
+        />
+    <Button
+        android:id="@+id/cmdIss_ReturnDate"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1.5"
+        android:text="Target Date"
+        android:background="@color/button_background"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <View android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+
+        android:gravity="center|bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cmdIss_Back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|center"
+            android:text="Back"
+            android:layout_marginRight="1dp"
+            android:background="@color/button_background"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/cmdIss_Save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|center"
+            android:text="Save"
+            android:background="@color/button_background"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/background"
+    android:weightSum="7"
+    >
+
+        <TextView
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/txtTasks_Description"
+            android:gravity="left|center"
+
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:background="@color/button_background"
+            android:text="Working?"
+            android:textStyle="bold"
+
+            />
+
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txtTasks_Remarks"
+        android:textAlignment="textStart"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:hint="Description type here!"
+        android:maxLines="2"
+        android:background="@color/white"
+
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:weightSum="4">
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:id="@+id/RG_Tasks"
+            >
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:text="Yes"
+            android:textColor="@color/white"
+            android:id="@+id/RD_Yes"
+            />
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:text="No"
+            android:textColor="@color/white"
+            android:id="@+id/RD_No"
+            />
+
+        </RadioGroup>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/button_background"
+            android:textColor="@color/white"
+            android:id="@+id/cmdDelete"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="Post"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/button_background"
+            android:textColor="@color/white"
+            android:id="@+id/cmdPost"
+            />
+    </LinearLayout>
+
+</LinearLayout>

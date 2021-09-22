@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <item
+        android:id="@+id/mnuAddRemark"
+        android:title="Add Remark"
+
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuMarkPriority"
+
+        android:title="Mark Priority"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuTasks"
+        android:title="Tasks"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuQC11"
+        android:title="QC 11:00 AM"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuQC16"
+        android:title="QC 16:00 PM"
+        android:enabled="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuDailyTasks"
+        android:title="Daily Tasks"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuCheckOnce"
+        android:title="Check Once"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuArchive"
+        android:title="Archive"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mnuViewSlip"
+        android:title="View Slip"
+        app:showAsAction="never" />
+</menu>
+

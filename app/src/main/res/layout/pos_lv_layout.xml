@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/background"
+    android:weightSum="12"
+    android:descendantFocusability="blocksDescendants"
+
+
+    >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:id="@+id/txtItemName"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/lv_items_layout"
+            android:textColor="@color/black"
+            android:text="Item Name"
+            android:gravity="center"
+            android:layout_margin="1dp"
+            android:paddingRight="5dp"
+
+            />
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:id="@+id/txtQty"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/lv_items_layout"
+            android:textColor="@color/black"
+            android:text="Qty"
+            android:layout_margin="1dp"
+            />
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@color/green"
+            android:id="@+id/cmdPlus"
+            android:onClick="cmdPlus_click"
+            />
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="-"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@color/red"
+            android:id="@+id/cmdMinus"
+            android:onClick="cmdMinus_click"
+
+            />
+</LinearLayout>

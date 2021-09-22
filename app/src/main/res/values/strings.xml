@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Restaurant Management System</string>
+    <string name="title_cutting_issuance">cutting_issuance</string>
+    <string name="ci_return_date">Return Date</string>
+
+    <string name="table_no">Table No</string>
+    <string name="server">Server</string>
+    <string name="order_from">Order From</string>
+    <string name="order_duration">Order Duration</string>
+    <string name="menu">Menu</string>
+    <string name="sub_menu">Sub Menu</string>
+
+    <string name="take_away">Take Away</string>
+    <string name="event_hall">Event Hall</string>
+    <string name="family_hall">Family Hall</string>
+    <string name="laiba_hall">Laiba Hall</string>
+    <string name="gents_hall">Gents Hall</string>
+    <string name="cafe">Cafe</string>
+
+    <string name="date">Date</string>
+    <string name="tableno">Table No</string>
+    <string name="name">Name</string>
+    <string name="profession">Profession</string>
+    <string name="contact">Contact</string>
+    <string name="address">Address</string>
+    <string name="email">Email</string>
+    <string name="suggestion">Suggestion</string>
+
+    <string name="Type">Type</string>
+    <string name="Breakfast">Breakfast</string>
+    <string name="Lunch">Lunch</string>
+    <string name="Dinner">Dinner</string>
+    <string name="Other">Other</string>
+
+    <string name="Food">Food</string>
+    <string name="Portion">Portion</string>
+    <string name="Service">Service</string>
+    <string name="Decor">Decor</string>
+    <string name="Atmosphere">Atmosphere</string>
+
+    <string name="Average">Average</string>
+    <string name="Good">Good</string>
+    <string name="Excellent">Excellent</string>
+</resources>

@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/background"
+    android:weightSum="1"
+    >
+
+
+    <TextView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/txtColor"
+        android:textAlignment="textStart"
+        android:textSize="0sp"
+        android:textColor="@color/white"
+
+        />
+
+</LinearLayout>
