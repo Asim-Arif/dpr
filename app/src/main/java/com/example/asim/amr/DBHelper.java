@@ -41,14 +41,23 @@ public class DBHelper {
         //strSQLIP="192.168.8.105";
         //strSQLIP="192.168.43.242";
 
-        //Allah Malak Settings
-        strSQLIP="192.168.1.116";
+        //Allah Malak Settings..
+        //strSQLIP="192.168.1.116";
+        //strSQLPort="1433";
+        //AMR
+        //strSQLIP="192.168.2.240";
+        //strSQLPort="1433";
+        //Event Hall
+        //strSQLIP="192.168.3.240";
+        //strSQLPort="1433";
+        //Cafe
+        strSQLIP="192.168.4.240";
         strSQLPort="1433";
         //
 
         //Laptop Settings
-        //strSQLIP="192.168.10.26";
-        //strSQLPort="49804";
+        //strSQLIP="192.168.10.24";
+        //strSQLPort="51178";
         //
 
         try
