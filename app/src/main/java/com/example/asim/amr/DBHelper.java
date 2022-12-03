@@ -45,14 +45,17 @@ public class DBHelper {
         //strSQLIP="192.168.1.116";
         //strSQLPort="1433";
         //AMR
-        //strSQLIP="192.168.2.240";
+        //strSQLIP="192.168.1.15";
         //strSQLPort="1433";
-        //Event Hall
-        //strSQLIP="192.168.3.240";
-        //strSQLPort="1433";
+
         //Cafe
-        strSQLIP="192.168.4.240";
+        //strSQLIP="192.168.1.16";
+        //strSQLPort="1433";
+
+        //Event Hall
+        strSQLIP="192.168.1.17";
         strSQLPort="1433";
+
         //
 
         //Laptop Settings
