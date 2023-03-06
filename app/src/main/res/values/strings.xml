@@ -41,4 +41,7 @@
     <string name="Average">Average</string>
     <string name="Good">Good</string>
     <string name="Excellent">Excellent</string>
+
+    <string name="TotalAmt">Total Amount</string>
+    <string name="TotalGuests">Total Guests</string>
 </resources>

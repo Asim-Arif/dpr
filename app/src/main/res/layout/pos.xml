@@ -170,13 +170,14 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_weight="0.8">
 
                 <Button
                     android:id="@+id/cmdCRM"
                     android:text="CRM"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_border"
                     android:padding="5dp"
@@ -184,7 +185,18 @@
                     android:gravity="center"
                     android:focusable="false"
                      />
-
+                <Button
+                    android:id="@+id/cmdQuotation"
+                    android:text="Quot"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_border"
+                    android:padding="5dp"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:focusable="false"
+                    />
 
             </LinearLayout>
 

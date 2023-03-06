@@ -2,6 +2,7 @@
 package com.example.asim.amr;
 
 
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -40,7 +41,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class pos extends Activity {
+public class quotation extends Activity {
 
     EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration;
     Connection MyCon;
@@ -51,7 +52,7 @@ public class pos extends Activity {
     Context context;
     ArrayList data;
     Map<String, String> datanum;
-    Button cmdClear,cmdCRM,cmdQuotation;
+    Button cmdClear,cmdQuotation,cmdSave;
     ListView myLV;
     int iAmount=0,lPendingSaleEntryID=0;
     LinearLayout ll_Family_Hall,ll_Laiba_HHall,ll_Gents_Hall,ll_Cafe,ll_TakeAway,ll_EventHall;
@@ -74,120 +75,37 @@ public class pos extends Activity {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
 
-        setContentView(R.layout.pos);
+        setContentView(R.layout.quotation);
         context = this.getBaseContext();
 
         txtTableNo=(EditText) findViewById(R.id.txtTableno);
         txtServer=(EditText)  findViewById(R.id.txtServer);
         txtOrderFrom=(EditText) findViewById(R.id.txtOrderfrom);
         txtOrderDuration=(EditText) findViewById(R.id.txtOrderduration);
-        /*cmdTable1=(Button)  findViewById(R.id.tbl1);
-        cmdTable1.setBackgroundColor(Color.GREEN);*/
-        cmdCRM=(Button) findViewById(R.id.cmdCRM);
-        cmdQuotation=(Button) findViewById(R.id.cmdQuotation);
-        ll_Family_Hall=(LinearLayout) findViewById(R.id.ll_FamilyHall);
-        ll_Laiba_HHall=(LinearLayout) findViewById(R.id.ll_LaibaHall);
-        ll_Gents_Hall=(LinearLayout) findViewById(R.id.ll_GentsHall);
-        ll_Cafe=(LinearLayout) findViewById(R.id.ll_Cafe);
-        ll_TakeAway=(LinearLayout) findViewById(R.id.ll_TakeAway);
-        ll_EventHall=(LinearLayout) findViewById(R.id.ll_EventHall);
 
-        cmdFamilyHall=(Button) findViewById(R.id.btnfamilyhall);
-        cmdLaibaHall=(Button) findViewById(R.id.btnlaibahall);
-        cmdGentsHall=(Button) findViewById(R.id.btngentshall);
-        cmdCafe=(Button) findViewById(R.id.btncafe);
-        cmdTakeAway=(Button) findViewById(R.id.btntakeaway);
-        cmdEventHall=(Button) findViewById(R.id.btneventhall);
-        cmdCRM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), crm.class);
-                startActivity(i);
-            }
-        });
-        cmdQuotation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), quotation.class);
-                startActivity(i);
-            }
-        });
-        cmdFamilyHall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_TakeAway.setVisibility(view.GONE);
-                ll_Cafe.setVisibility(view.GONE);
-                ll_Gents_Hall.setVisibility(view.GONE);
-                ll_Laiba_HHall.setVisibility(View.GONE);
-                ll_Family_Hall.setVisibility(View.VISIBLE);
-                ll_EventHall.setVisibility(view.GONE);
-            }
-        });
-        cmdLaibaHall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_TakeAway.setVisibility(view.GONE);
-                ll_Cafe.setVisibility(view.GONE);
-                ll_Gents_Hall.setVisibility(view.GONE);
-                ll_Family_Hall.setVisibility(View.GONE);
-                ll_Laiba_HHall.setVisibility(View.VISIBLE);
-                ll_EventHall.setVisibility(view.GONE);
-            }
-        });
-        cmdGentsHall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_TakeAway.setVisibility(view.GONE);
-                ll_Cafe.setVisibility(view.GONE);
-                ll_Gents_Hall.setVisibility(view.VISIBLE);
-                ll_Family_Hall.setVisibility(View.GONE);
-                ll_Laiba_HHall.setVisibility(View.GONE);
-                ll_EventHall.setVisibility(view.GONE);
-            }
-        });
-        cmdCafe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_TakeAway.setVisibility(view.GONE);
-                ll_Cafe.setVisibility(view.VISIBLE);
-                ll_Gents_Hall.setVisibility(view.GONE);
-                ll_Family_Hall.setVisibility(View.GONE);
-                ll_Laiba_HHall.setVisibility(View.GONE);
-                ll_EventHall.setVisibility(view.GONE);
-            }
-        });
-        cmdTakeAway.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_TakeAway.setVisibility(view.VISIBLE);
-                ll_Cafe.setVisibility(view.GONE);
-                ll_Gents_Hall.setVisibility(view.GONE);
-                ll_Family_Hall.setVisibility(View.GONE);
-                ll_Laiba_HHall.setVisibility(View.GONE);
-                ll_EventHall.setVisibility(view.GONE);
-            }
-        });
-        cmdEventHall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ll_EventHall.setVisibility(view.VISIBLE);
-                ll_Cafe.setVisibility(view.GONE);
-                ll_Gents_Hall.setVisibility(view.GONE);
-                ll_Family_Hall.setVisibility(View.GONE);
-                ll_Laiba_HHall.setVisibility(View.GONE);
-                ll_TakeAway.setVisibility(View.GONE);
-            }
-        });
+
         data = new ArrayList<Map<String, String>>();
 
-        String[] fromwhere = { "ItemName","Qty"};
+        String[] fromwhere = { "ItemName","Qty","Amount"};
 
-        int[] toViewIDs = new int[] {R.id.txtItemName,R.id.txtQty};
+        int[] toViewIDs = new int[] {R.id.txtItemName,R.id.txtQty,R.id.txtAmt};
 
-        myCursorAdapter=new SimpleAdapter(context,data,R.layout.pos_lv_layout,fromwhere,toViewIDs);
-        myCursorAdapter.setDropDownViewResource(R.layout.pos_lv_layout);
+        myCursorAdapter=new SimpleAdapter(context,data,R.layout.quotation_lv_layout,fromwhere,toViewIDs);
+        myCursorAdapter.setDropDownViewResource(R.layout.quotation_lv_layout);
+
+        cmdSave=(Button) findViewById(R.id.cmdSave);
+
+        cmdSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveQuotation();
+            }
+        });
+
 
         myLV=(ListView) findViewById(R.id.LV);
+
+
         myLV.setClickable(true);
         myLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -197,43 +115,11 @@ public class pos extends Activity {
         });
         myLV.setAdapter(myCursorAdapter);
 
-        LinearLayout ll;
-        ll=(LinearLayout) findViewById(R.id.ll_FH_1);
-        assignTables(ll,0);
-        ll=(LinearLayout) findViewById(R.id.ll_FH_2);
-        assignTables(ll,20);
-
-        ll=(LinearLayout) findViewById(R.id.ll_LH_1);
-        assignTables(ll,40);
-        ll=(LinearLayout) findViewById(R.id.ll_LH_2);
-        assignTables(ll,50);
-
-        ll=(LinearLayout) findViewById(R.id.ll_GH_1);
-        assignTables(ll,60);
-        ll=(LinearLayout) findViewById(R.id.ll_GH_2);
-        assignTables(ll,70);
-
-        ll=(LinearLayout) findViewById(R.id.ll_Cafe_1);
-        assignTables(ll,80);
-        ll=(LinearLayout) findViewById(R.id.ll_Cafe_2);
-        assignTables(ll,90);
-
-        ll=(LinearLayout) findViewById(R.id.ll_TakeAway_1);
-        assignTables(ll,99);
-        ll=(LinearLayout) findViewById(R.id.ll_TakeAway_2);
-        assignTables(ll,105);
-
-        ll=(LinearLayout) findViewById(R.id.ll_EventHall_1);
-        assignTables(ll,110);
-        ll=(LinearLayout) findViewById(R.id.ll_EventHall_2);
-        assignTables(ll,130);
-
-        iMilliSeconds = Integer.parseInt(utility_functions.getSingleStringValue("DataValue","GeneralData"," WHERE DataName='Tables_Refresh_Seconds'",context));
-        iMilliSeconds = iMilliSeconds *1000;
+        /*iMilliSeconds = Integer.parseInt(utility_functions.getSingleStringValue("DataValue","GeneralData"," WHERE DataName='Tables_Refresh_Seconds'",context));
+        iMilliSeconds = iMilliSeconds *1000;*/
 
         loadMainMenus();
-        refreshTables();
-        reload();
+
     }
 
 
@@ -433,6 +319,7 @@ public class pos extends Activity {
             {
                 int i;
                 int iQty=0;
+                int dAmt=0;
                 for (i=0;i<data.size();i++)
                 {
                     //datanum=data[i];
@@ -442,10 +329,13 @@ public class pos extends Activity {
                     {
                         iQty=Integer.parseInt(datanum.get("Qty"));
                         iQty=iQty+1;
+                        dAmt=iQty*Integer.parseInt(datanum.get("Rate"));
                         //datanum.entrySet("Qty",Integer.toString(iQty));
                         datanum.put("Qty",Integer.toString(iQty));
+                        datanum.put("Amount",Integer.toString(dAmt));
                         data.set(i,datanum);
                         myCursorAdapter.notifyDataSetChanged();
+                        updateTotalAmount();
                         return;
                     }
                     //Check if Item already exists, just increment the qty.
@@ -506,9 +396,11 @@ public class pos extends Activity {
                 datanum.put("TabQty","0");
                 datanum.put("Column6Tag","");
                 datanum.put("QtyPrinted","0");
+                datanum.put("Amount",Integer.toString(dRate));
                 data.add(datanum);
 
                 myCursorAdapter.notifyDataSetChanged();
+                updateTotalAmount();
                 myLV.setSelection(myCursorAdapter.getCount() - 1);
 
             }
@@ -940,10 +832,13 @@ public class pos extends Activity {
             return;
         }
         int iQty=Integer.parseInt(datanum.get("Qty"));
+        int dRate=Integer.parseInt(datanum.get("Rate"));
         iQty++;
         datanum.put("Qty",Integer.toString(iQty));
+        datanum.put("Amount",Integer.toString(iQty*dRate));
         data.set(position,datanum);
         myCursorAdapter.notifyDataSetChanged();
+        updateTotalAmount();
     }
     public void cmdMinus_click(View v)
     {
@@ -971,11 +866,14 @@ public class pos extends Activity {
             data.remove(position);
         }
         else{
+            int dRate=Integer.parseInt(datanum.get("Rate"));
             datanum.put("Qty",Integer.toString(iQty));
+            datanum.put("Amount",Integer.toString(iQty*dRate));
             data.set(position,datanum);
         }
 
         myCursorAdapter.notifyDataSetChanged();
+        updateTotalAmount();
     }
     private int getFontSize(String string,int iLen,int iTextWidth) {
         int iFontSize = 9;
@@ -1119,5 +1017,73 @@ public class pos extends Activity {
         }
         else
             return true;
+    }
+    private void updateTotalAmount()
+    {
+        int i,dAmt=0;
+        for (i=0;i<data.size();i++)
+        {
+            //datanum=data[i];
+            Map<String, String> datanum=(Map<String, String>) data.get(i);
+            dAmt=dAmt+Integer.parseInt(datanum.get("Amount"));
+
+            txtTableNo.setText(Integer.toString(dAmt));
+        }
+    }
+    private void saveQuotation()
+    {
+        int i,iFM_EntryID,iRate,iQty;
+        int iQuot_EntryID;
+        DBHelper myDBH = new DBHelper();
+        Connection MyCon = myDBH.connectionclass(getApplicationContext());        // Connect to database
+        String strQuery="";
+        PreparedStatement stmt;
+        try {
+            MyCon.setAutoCommit(false);
+            strQuery = "INSERT INTO Quotations(Total_Guests,Order_From,Order_Duration) VALUES(?,?,?)";
+            stmt = MyCon.prepareStatement(strQuery);
+            stmt.setString(1, txtServer.getText().toString());
+            stmt.setString(2, txtOrderFrom.getText().toString());
+            stmt.setString(3,txtOrderDuration.getText().toString());
+
+            stmt.addBatch();
+            stmt.executeBatch();
+
+            iQuot_EntryID = utility_functions.getSingleIntValue(MyCon, "MAX(EntryID)", "Quotations", "", context);
+
+            for (i=0;i<data.size();i++)
+            {
+                Map<String, String> datanum=(Map<String, String>) data.get(i);
+                iFM_EntryID=Integer.parseInt(datanum.get("FM_EntryID"));
+                iRate=Integer.parseInt(datanum.get("Rate"));
+                iQty=Integer.parseInt(datanum.get("Qty"));
+
+                strQuery = "INSERT INTO Quotations_Detail(RefID,FM_RefID,Rate,Qty) VALUES(?,?,?,?)";
+                stmt = MyCon.prepareStatement(strQuery);
+
+                stmt.setInt(1, iQuot_EntryID);
+                stmt.setInt(2, iFM_EntryID);
+                stmt.setInt(3, iRate);
+                stmt.setInt(4, iQty);
+
+                stmt.addBatch();
+                stmt.executeBatch();
+            }
+            MyCon.commit();
+            data.clear();
+
+            myCursorAdapter.notifyDataSetChanged();
+            txtTableNo.setText("");
+            txtServer.setText("");
+            txtOrderFrom.setText("");
+            txtOrderDuration.setText("");
+        }
+        catch (SQLException e) {
+
+            e.printStackTrace();
+            Message.message(context,e.toString());
+        }
+
+
     }
 }

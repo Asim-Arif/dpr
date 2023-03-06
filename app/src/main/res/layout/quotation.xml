@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:weightSum="12.3"
+    android:id="@+id/ll_Main"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:baselineAligned="false"
+        android:id="@+id/ll_Sub1"
+        android:weightSum="4.2"
+        >
+        <LinearLayout
+            android:id="@+id/ll_Sub_Sub1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvTableno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/TotalAmt"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+
+
+            <EditText
+                android:id="@+id/txtTableno"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:focusable="false"
+                android:hint="@string/TotalAmt"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvServer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/TotalGuests"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/txtServer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:focusable="true"
+                android:tag=""
+                android:hint="@string/TotalGuests" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:id="@+id/tvOrderfrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/order_from"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+
+
+            <EditText
+                android:id="@+id/txtOrderfrom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:focusable="true"
+                android:hint="@string/order_from"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1.2">
+
+
+            <TextView
+                android:id="@+id/tvOrderduration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/order_duration"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/txtOrderduration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:focusable="true"
+                android:hint="@string/order_duration" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="10"
+        android:weightSum="3"
+        android:baselineAligned="false"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/ll_Sub2"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="10"
+            android:id="@+id/ll_Sub2_1"
+            >
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:id="@+id/LV"
+                android:layout_marginLeft="10dp"
+                android:divider="@color/background"
+                android:background="@drawable/btn_grey"
+                />
+            <Button
+                android:id="@+id/cmdSave"
+                android:text="Save"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:focusable="false"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="1dp"
+            android:orientation="vertical"
+            android:background="@drawable/edittext_border"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:id="@+id/ll_Sub2_2"
+            >
+
+
+            <TextView
+                android:id="@+id/tvSubmenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sub_menu"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:background="@drawable/menu_heading"
+                />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                >
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ll_SubMenus"
+                    android:columnCount="3"
+                    >
+                </GridLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/tvMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:background="@drawable/menu_heading"
+                />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                >
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:stretchMode="none"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ll_Menus"
+                    android:columnCount="5"
+                    >
+                </GridLayout>
+            </ScrollView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

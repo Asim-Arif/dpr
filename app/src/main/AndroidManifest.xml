@@ -133,6 +133,14 @@
         </activity>
 
         <activity
+            android:name="com.example.asim.amr.quotation"
+            android:label="QUOTATION"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
             android:name="com.example.asim.amr.daily_tasks"
             android:label="Daily Tasks"
             android:windowSoftInputMode="stateHidden"
