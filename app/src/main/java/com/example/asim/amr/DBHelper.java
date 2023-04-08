@@ -32,7 +32,9 @@ public class DBHelper {
         preferences= PreferenceManager.getDefaultSharedPreferences(context);
 
         String strSQLIP = preferences.getString("SQLIP", "");
-        String strSQLPort = preferences.getString("SQLPort", "");
+        String strSQLPort = "1433";//preferences.getString("SQLPort", "");
+
+        strSQLIP=context.getString(R.string.sql_ip);
         //Vision Settings
         //strSQLIP="192.168.0.22";
         //strSQLPort="50801";
@@ -53,14 +55,18 @@ public class DBHelper {
         //strSQLPort="1433";
 
         //Event Hall
-        strSQLIP="192.168.1.17";
-        strSQLPort="1433";
+        //strSQLIP="192.168.1.17";
+        //strSQLPort="1433";
+        //
 
+        //Frangoz Demo
+        //strSQLIP="192.168.1.124";
+        //strSQLPort="1433";
         //
 
         //Laptop Settings
-        //strSQLIP="192.168.10.9";
-        //strSQLPort="51178";
+        strSQLIP="192.168.10.12";
+        strSQLPort="51178";
         //
 
         try

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 26
     //buildToolsVersion "25.0.0"
     defaultConfig {
@@ -15,6 +16,41 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    flavorDimensions 'mode'
+    productFlavors{
+        AMR{
+            dimension 'mode'
+            resValue "string", "app_name", "AMR"
+            resValue "string", "sql_ip", "192.168.1.15"
+            applicationId 'com.example.asim.amr'
+            versionName "$defaultConfig.versionName" + ".AMR"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/amr_logo"
+            ]
+        }
+
+        Cafe{
+            dimension 'mode'
+            resValue "string", "app_name", "Cafe"
+            resValue "string", "sql_ip", "192.168.1.16"
+            applicationId 'com.example.asim.cafe'
+            versionName "$defaultConfig.versionName" + ".Cafe"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/cafe_logo"
+            ]
+        }
+        eventhall{
+            dimension 'mode'
+            resValue "string", "app_name", "EventHall"
+            resValue "string", "sql_ip", "192.168.1.17"
+            applicationId 'com.example.asim.eventhall'
+            versionName "$defaultConfig.versionName" + ".eventhall"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/event_hall"
+            ]
         }
     }
 }

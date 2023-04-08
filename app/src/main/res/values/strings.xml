@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Restaurant Management System</string>
+
     <string name="title_cutting_issuance">cutting_issuance</string>
     <string name="ci_return_date">Return Date</string>
 

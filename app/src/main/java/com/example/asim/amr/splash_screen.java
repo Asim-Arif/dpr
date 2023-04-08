@@ -2,8 +2,10 @@ package com.example.asim.amr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 
 public class splash_screen extends Activity {
 
@@ -15,6 +17,23 @@ public class splash_screen extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.splash_screen);
+
+        String uri = "@mipmap/amr_logo";  // where myresource (without the extension) is the file
+        String strVariant=getString(R.string.app_name);
+        if (strVariant.equals("AMR"))
+            uri = "@mipmap/amr_logo";
+        else if (strVariant.equals("Cafe"))
+            uri = "@mipmap/cafe_logo";
+        else if (strVariant.equals("EventHall"))
+            uri = "@mipmap/event_hall";
+
+        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+
+        ImageView imageview= (ImageView)findViewById(R.id.splashscreen);
+        Drawable res = getResources().getDrawable(imageResource);
+        imageview.setImageDrawable(res);
+
+
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable(){
