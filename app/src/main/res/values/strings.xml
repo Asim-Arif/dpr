@@ -6,9 +6,11 @@
     <string name="table_no">Table No</string>
     <string name="server">Server</string>
     <string name="order_from">Order From</string>
+    <string name="guest_name">Guest Name</string>
     <string name="order_duration">Order Duration</string>
     <string name="menu">Menu</string>
     <string name="sub_menu">Sub Menu</string>
+    <string name="Booking_Date_Time">Booking Date Time</string>
 
     <string name="take_away">Take Away</string>
     <string name="event_hall">Event Hall</string>

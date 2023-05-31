@@ -4,6 +4,8 @@ package com.example.asim.amr;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
@@ -23,27 +25,36 @@ import android.view.Display;
 import android.view.View;
 
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class quotation extends Activity {
 
     EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration;
+    Spinner cmbHall;
     Connection MyCon;
     PreparedStatement stmt;
     ResultSet rs;
@@ -69,6 +80,7 @@ public class quotation extends Activity {
     int iSalesTax;
     int iMilliSeconds;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -78,11 +90,61 @@ public class quotation extends Activity {
         setContentView(R.layout.quotation);
         context = this.getBaseContext();
 
+        cmbHall=(Spinner) findViewById(R.id.cmbHall);
+        fillHalls();
+
+        cmbHall.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String strHall=cmbHall.getSelectedItem().toString();
+                if (strHall.equals("Select Hall")==true)
+                {
+                    //nothing to do here.
+                }
+                else
+                {
+                    updateTotalAmount();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         txtTableNo=(EditText) findViewById(R.id.txtTableno);
         txtServer=(EditText)  findViewById(R.id.txtServer);
         txtOrderFrom=(EditText) findViewById(R.id.txtOrderfrom);
         txtOrderDuration=(EditText) findViewById(R.id.txtOrderduration);
 
+        txtOrderDuration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar currentDate = Calendar.getInstance();
+                final Calendar date=Calendar.getInstance();
+                new DatePickerDialog(view.getContext(), android.R.style.Theme_Holo_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        date.set(year, monthOfYear, dayOfMonth);
+                        new TimePickerDialog(view.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                date.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                date.set(Calendar.MINUTE, minute);
+                                //Log.v(TAG, "The choosen one " + date.getTime());
+                                //Message.message(context,date.getTime().toString());
+                                SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+                                txtOrderDuration.setText(sdf.format(date.getTime()));
+                                sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                txtOrderDuration.setTag(sdf.format(date.getTime()));
+                            }
+                        }, currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE), false).show();
+                    }
+                }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE)).show();
+            }
+        });
 
         data = new ArrayList<Map<String, String>>();
 
@@ -1020,18 +1082,85 @@ public class quotation extends Activity {
     }
     private void updateTotalAmount()
     {
-        int i,dAmt=0;
+        String strHallName=cmbHall.getSelectedItem().toString();
+
+        int iHallID=utility_functions.getSingleIntValue("EntryID","Hall_List"," WHERE Hall_Name='"+ strHallName+"'",context);
+        String strHallID=String.valueOf(iHallID);
+
+        boolean bSTaxApplicable=false,bServiceChargesApplicable=false;
+        double dSales_Tax_Rate=0,dService_Charges_Rate=0,dSales_Tax=0,dService_Charges=0;
+        bSTaxApplicable=utility_functions.getSingleBooleanValue("Sales_Tax_Applicable","Hall_List"," WHERE EntryID="+strHallID,context);
+        bServiceChargesApplicable=utility_functions.getSingleBooleanValue("Service_Charges_Applicable","Hall_List"," WHERE EntryID="+strHallID,context);
+        if (bSTaxApplicable){
+            dSales_Tax_Rate=utility_functions.getSingleDoubleValue("Sales_Tax_Rate","Hall_List"," WHERE EntryID="+strHallID,context);
+        }
+        if (bServiceChargesApplicable){
+            dService_Charges_Rate=utility_functions.getSingleDoubleValue("Service_Charges_Rate","Hall_List"," WHERE EntryID="+strHallID,context);
+        }
+
+        int i;
+        double dAmt=0,dTotalAmt=0;
         for (i=0;i<data.size();i++)
         {
             //datanum=data[i];
             Map<String, String> datanum=(Map<String, String>) data.get(i);
             dAmt=dAmt+Integer.parseInt(datanum.get("Amount"));
 
-            txtTableNo.setText(Integer.toString(dAmt));
+            if (dSales_Tax_Rate>0)
+                dSales_Tax=(dAmt/100)*dSales_Tax_Rate;
+
+            if (dService_Charges_Rate>0)
+                dService_Charges=(dAmt/100)*dService_Charges_Rate;
+
+            dTotalAmt=dAmt+dSales_Tax+dService_Charges;
+            txtTableNo.setText(Double.toString(dTotalAmt));
+            txtTableNo.setTag(Double.toString(dAmt));
         }
     }
     private void saveQuotation()
     {
+
+
+        String strHallName=cmbHall.getSelectedItem().toString();
+        if (strHallName.equals("Select Hall"))
+        {
+            Message.message(context,"Please Select Hall");
+            return;
+        }
+
+        int iHallID=utility_functions.getSingleIntValue("EntryID","Hall_List"," WHERE Hall_Name='"+ strHallName+"'",context);
+        String strHallID=String.valueOf(iHallID);
+
+        boolean bSTaxApplicable=false,bServiceChargesApplicable=false;
+        double dSales_Tax_Rate=0,dService_Charges_Rate=0,dSales_Tax=0,dService_Charges=0,dAmt=0;
+        bSTaxApplicable=utility_functions.getSingleBooleanValue("Sales_Tax_Applicable","Hall_List"," WHERE EntryID="+strHallID,context);
+        bServiceChargesApplicable=utility_functions.getSingleBooleanValue("Service_Charges_Applicable","Hall_List"," WHERE EntryID="+strHallID,context);
+        if (bSTaxApplicable){
+            dSales_Tax_Rate=utility_functions.getSingleDoubleValue("Sales_Tax_Rate","Hall_List"," WHERE EntryID="+strHallID,context);
+        }
+        if (bServiceChargesApplicable){
+            dService_Charges_Rate=utility_functions.getSingleDoubleValue("Service_Charges_Rate","Hall_List"," WHERE EntryID="+strHallID,context);
+        }
+        dAmt=Double.parseDouble(txtTableNo.getTag().toString());
+        if (bSTaxApplicable)
+            dSales_Tax=(dAmt/100)*dSales_Tax_Rate;
+        if (bServiceChargesApplicable)
+            dService_Charges=(dAmt/100)*dService_Charges_Rate;
+
+        /*Calendar c=Calendar.getInstance();
+        ParsePosition pos = new ParsePosition(0);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-dd-MM");*/
+
+        String strDate=txtOrderDuration.getTag().toString();
+        Date DT=Date.valueOf(strDate.substring(0,10));
+        Timestamp DTWithTime=Timestamp.valueOf(strDate);
+
+        /*strDate=strDate.substring(6,4)+"-"+strDate.substring(0,2)+"-"+;
+        Date DT=Date.valueOf(strDate.substring(0,11));
+        Date DTWithTime=Date.valueOf(strDate);*/
+
+        //Date DT=new java.sql.Date(sdf.parse(txtOrderDuration.toString(),pos));
+
         int i,iFM_EntryID,iRate,iQty;
         int iQuot_EntryID;
         DBHelper myDBH = new DBHelper();
@@ -1040,11 +1169,20 @@ public class quotation extends Activity {
         PreparedStatement stmt;
         try {
             MyCon.setAutoCommit(false);
-            strQuery = "INSERT INTO Quotations(Total_Guests,Order_From,Order_Duration) VALUES(?,?,?)";
+            strQuery = "INSERT INTO Quotations(Total_Guests,Order_From,Order_Duration,Sales_Tax_Rate,Service_Charges_Rate,Sales_Tax,Service_Charges,DT,DTWithTime,HL_RefID) VALUES(?,?,?,?,?,?,?,?,?,?)";
             stmt = MyCon.prepareStatement(strQuery);
             stmt.setString(1, txtServer.getText().toString());
             stmt.setString(2, txtOrderFrom.getText().toString());
             stmt.setString(3,txtOrderDuration.getText().toString());
+
+            stmt.setDouble(4,dSales_Tax_Rate);
+            stmt.setDouble(5,dService_Charges_Rate);
+            stmt.setDouble(6,dSales_Tax);
+            stmt.setDouble(7,dService_Charges);
+
+            stmt.setDate(8,DT);
+            stmt.setObject(9,DTWithTime);
+            stmt.setInt(10,iHallID);
 
             stmt.addBatch();
             stmt.executeBatch();
@@ -1084,6 +1222,30 @@ public class quotation extends Activity {
             Message.message(context,e.toString());
         }
 
+
+    }
+    private void fillHalls(){
+
+        DBHelper myDBH=new DBHelper();
+        Connection MyCon = myDBH.connectionclass(getApplicationContext());        // Connect to database
+
+        String query = "SELECT EntryID,Hall_Name FROM Hall_List ORDER BY EntryID";
+        int iIndex;
+        List<String> Halls = new ArrayList<String>();
+        Halls.add("Select Hall");
+        try {
+            PreparedStatement stmt=MyCon.prepareStatement(query);
+            ResultSet rs=stmt.executeQuery();
+            while (rs.next()){
+                Halls.add(rs.getString("Hall_Name"));
+            }
+            // Creating adapter for spinner
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Halls);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cmbHall.setAdapter(dataAdapter);
+        } catch (Exception e) {
+            Message.message(this.getBaseContext(),""+e);
+        }
 
     }
 }

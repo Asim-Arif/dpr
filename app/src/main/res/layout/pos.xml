@@ -35,18 +35,17 @@
                     android:layout_gravity="center"
                     android:text="@string/table_no"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:textAlignment="center"
                     />
-
 
                 <EditText
                     android:id="@+id/txtTableno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_border"
-                    android:padding="5dp"
-                    android:textSize="14sp"
+                    android:padding="2dp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:focusable="false"
                     android:hint="@string/table_no"
@@ -72,7 +71,7 @@
                     android:layout_gravity="center"
                     android:text="@string/server"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:textAlignment="center" />
 
                 <EditText
@@ -80,8 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_border"
-                    android:padding="5dp"
-                    android:textSize="14sp"
+                    android:padding="2dp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:focusable="false"
                     android:tag=""
@@ -108,7 +107,7 @@
                     android:layout_gravity="center"
                     android:text="@string/order_from"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:textAlignment="center"
                     />
 
@@ -118,8 +117,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_border"
-                    android:padding="5dp"
-                    android:textSize="14sp"
+                    android:padding="2dp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:focusable="false"
                     android:hint="@string/order_from"
@@ -146,7 +145,7 @@
                     android:layout_gravity="center"
                     android:text="@string/order_duration"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
 
                     android:textAlignment="center" />
 
@@ -155,8 +154,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edittext_border"
-                    android:padding="5dp"
-                    android:textSize="14sp"
+                    android:padding="2dp"
+                    android:textSize="12sp"
                     android:gravity="center"
                     android:focusable="false"
                     android:hint="@string/order_duration" />
