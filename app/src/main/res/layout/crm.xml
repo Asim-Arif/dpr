@@ -5,20 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="12"
+    android:weightSum="13"
+    android:id="@+id/ll_main"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:id="@+id/ll_line1"
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -53,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -86,7 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -122,7 +126,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -157,13 +161,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:id="@+id/ll_line2"
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -197,8 +204,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
@@ -236,18 +243,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:baselineAligned="false">
-
+        android:baselineAligned="false"
+        android:id="@+id/ll_line3"
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
-            android:layout_weight="5">
+            android:layout_weight="4">
 
             <TextView
                 android:id="@+id/tvEmail"
@@ -274,15 +283,16 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+            <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
-            android:layout_weight="7">
+            android:layout_weight="8">
 
             <TextView
                 android:id="@+id/tvSuggestion"
@@ -315,21 +325,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:baselineAligned="false"
-        android:layout_weight="4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/ll_line4"
+        android:layout_weight="0.6"
+        android:weightSum="5"
+        android:background="@drawable/edittext_border"
         >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
             <TextView
                 android:id="@+id/tvType"
                 android:layout_width="match_parent"
@@ -338,71 +342,98 @@
                 android:text="@string/Type"
                 android:textColor="@color/green"
                 android:textStyle="bold"
-                android:textSize="30dp"
+                android:textSize="22dp"
                 android:textAlignment="center"
                 android:layout_marginBottom="10dp"
+                android:layout_weight="4"
                 />
 
-
-            <CheckBox
-                android:id="@+id/Breakfast"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Breakfast"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="4"
+                >
+                <CheckBox
+                    android:id="@+id/Breakfast"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Breakfast"
+                    android:textColor="@color/blue"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    />
+                <CheckBox
+                    android:id="@+id/Lunch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Lunch"
+                    android:textColor="@color/blue"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    />
 
-            <CheckBox
-                android:id="@+id/Lunch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Lunch"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
-
-            <CheckBox
-                android:id="@+id/Dinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Dinner"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                />
+                <CheckBox
+                    android:id="@+id/Dinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Dinner"
+                    android:textColor="@color/blue"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    />
 
 
-            <CheckBox
-                android:id="@+id/Other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Other"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
+                <CheckBox
+                    android:id="@+id/Other"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Other"
+                    android:textColor="@color/blue"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    />
 
-        </LinearLayout>
+            </LinearLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:layout_weight="5"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edittext_border"
+        android:id="@+id/ll_feedback_main"
+        >
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/Food"
+                android:id="@+id/txtFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -410,41 +441,21 @@
                 android:textColor="@color/green"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="30dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
                 />
 
-
-            <CheckBox
-                android:id="@+id/Average"
+            <RatingBar
+                android:id="@+id/foodrating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Average"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/Good"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Good"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/Excellent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Excellent"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4"
+                android:theme="@style/RatingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:isIndicator="false"
 
                 />
 
@@ -453,8 +464,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
@@ -469,50 +480,32 @@
                 android:textColor="@color/green"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="30dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
                 />
 
-
-            <CheckBox
-                android:id="@+id/PAverage"
+            <RatingBar
+                android:id="@+id/portionrating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Average"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
+                android:layout_gravity="center"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4"
+                android:theme="@style/RatingBar"
+                android:isIndicator="false"
+
                 />
 
-            <CheckBox
-                android:id="@+id/PGood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Good"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/PExcellent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Excellent"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
@@ -527,41 +520,22 @@
                 android:textColor="@color/green"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="30dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
                 />
 
 
-            <CheckBox
-                android:id="@+id/SAverage"
+            <RatingBar
+                android:id="@+id/servicerating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Average"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/SGood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Good"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/SExcellent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Excellent"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4"
+                android:theme="@style/RatingBar"
+                android:isIndicator="false"
                 />
 
         </LinearLayout>
@@ -569,8 +543,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
@@ -585,41 +559,22 @@
                 android:textColor="@color/green"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="30dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
                 />
 
 
-            <CheckBox
-                android:id="@+id/DAverage"
+            <RatingBar
+                android:id="@+id/decorrating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Average"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/DGood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Good"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/DExcellent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Excellent"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4"
+                android:theme="@style/RatingBar"
+                android:isIndicator="false"
                 />
 
         </LinearLayout>
@@ -627,8 +582,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
@@ -643,40 +598,21 @@
                 android:textColor="@color/green"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:textSize="27dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20dp"
                 />
 
-            <CheckBox
-                android:id="@+id/AAverage"
+            <RatingBar
+                android:id="@+id/atmosphererating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Average"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/AGood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Good"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                />
-
-            <CheckBox
-                android:id="@+id/AExcellent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Excellent"
-                android:textColor="@color/blue"
-                android:textSize="18dp"
-                android:textStyle="bold"
+                android:layout_gravity="center"
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="4"
+                android:theme="@style/RatingBar"
+                android:isIndicator="false"
                 />
 
         </LinearLayout>
@@ -688,8 +624,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:baselineAligned="false"
-        android:layout_weight="1"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="2"
         android:weightSum="2"
+        android:id="@+id/ll_savecancel"
         >
 
         <Button

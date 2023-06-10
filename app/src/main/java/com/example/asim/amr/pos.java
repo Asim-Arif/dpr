@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class pos extends Activity {
 
-    EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration;
+    EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration,txtBill5,txtBill16;
     Connection MyCon;
     PreparedStatement stmt;
     ResultSet rs;
@@ -81,6 +81,8 @@ public class pos extends Activity {
         txtServer=(EditText)  findViewById(R.id.txtServer);
         txtOrderFrom=(EditText) findViewById(R.id.txtOrderfrom);
         txtOrderDuration=(EditText) findViewById(R.id.txtOrderduration);
+        txtBill5=(EditText) findViewById(R.id.txtTotalBill_5Percent);
+        txtBill16=(EditText) findViewById(R.id.txtTotalBill_16Percent);
         /*cmdTable1=(Button)  findViewById(R.id.tbl1);
         cmdTable1.setBackgroundColor(Color.GREEN);*/
         cmdCRM=(Button) findViewById(R.id.cmdCRM);
@@ -446,6 +448,7 @@ public class pos extends Activity {
                         datanum.put("Qty",Integer.toString(iQty));
                         data.set(i,datanum);
                         myCursorAdapter.notifyDataSetChanged();
+                        CalculateBill();
                         return;
                     }
                     //Check if Item already exists, just increment the qty.
@@ -510,7 +513,7 @@ public class pos extends Activity {
 
                 myCursorAdapter.notifyDataSetChanged();
                 myLV.setSelection(myCursorAdapter.getCount() - 1);
-
+                CalculateBill();
             }
         } catch (Exception e) {
             Message.message(this.getBaseContext(),""+e);
@@ -748,6 +751,8 @@ public class pos extends Activity {
             myCursorAdapter.notifyDataSetChanged();
             txtTableNo.setText("");
             txtServer.setText("");
+            txtBill5.setText("");
+            txtBill16.setText("");
             tableData_Obj.iStatus=1;
             tableData_Obj.iEntryID=iPS_EntryID;
             //tableData_Obj.btnTable.setBackgroundColor(Color.YELLOW);
@@ -901,6 +906,7 @@ public class pos extends Activity {
                 //tableData_Obj.btnTable.setBackgroundColor(Color.BLUE);
                 tableData_Obj.btnTable.setBackgroundResource(R.drawable.btn_blue);
                 //res.getColor(R.color.your_special_color));
+                CalculateBill();
             }
 
         } catch (Exception e) {
@@ -944,6 +950,7 @@ public class pos extends Activity {
         datanum.put("Qty",Integer.toString(iQty));
         data.set(position,datanum);
         myCursorAdapter.notifyDataSetChanged();
+        CalculateBill();
     }
     public void cmdMinus_click(View v)
     {
@@ -976,6 +983,7 @@ public class pos extends Activity {
         }
 
         myCursorAdapter.notifyDataSetChanged();
+        CalculateBill();
     }
     private int getFontSize(String string,int iLen,int iTextWidth) {
         int iFontSize = 9;
@@ -1119,5 +1127,24 @@ public class pos extends Activity {
         }
         else
             return true;
+    }
+    private void CalculateBill()
+    {
+        int i;
+        double iTotalBill=0,iTotalBill_5Percent,iTotalBill_16Percent;
+        for (i=0;i<data.size();i++)
+        {
+            Map<String, String> datanum=(Map<String, String>) data.get(i);
+            int iEntryID=Integer.parseInt(datanum.get("EntryID"));
+            String strItemName=datanum.get("ItemName");
+            int iFM_EntryID=Integer.parseInt(datanum.get("FM_EntryID"));
+            int iRate=Integer.parseInt(datanum.get("Rate"));
+            int iQty=Integer.parseInt(datanum.get("Qty"));
+            iTotalBill+=(iRate*iQty);
+        }
+        iTotalBill_5Percent=iTotalBill+(iTotalBill*.05);
+        iTotalBill_16Percent=iTotalBill+(iTotalBill*.16);
+        txtBill5.setText(String.format("%.0f",iTotalBill_5Percent));
+        txtBill16.setText(String.format("%.0f",iTotalBill_16Percent));
     }
 }

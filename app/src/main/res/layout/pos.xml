@@ -224,12 +224,46 @@
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="10"
+                    android:layout_weight="9"
                     android:id="@+id/LV"
                     android:layout_marginLeft="10dp"
                     android:divider="@color/background"
                     android:background="@drawable/btn_grey"
                     />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="1dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="2"
+                    android:id="@+id/ll_Total_Bill">
+                    <EditText
+                        android:id="@+id/txtTotalBill_5Percent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_border"
+                        android:padding="2dp"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:hint="5% Bill Amount"
+                        />
+                    <EditText
+                        android:id="@+id/txtTotalBill_16Percent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edittext_border"
+                        android:padding="2dp"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:focusable="false"
+                        android:hint="16% Bill Amount"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout

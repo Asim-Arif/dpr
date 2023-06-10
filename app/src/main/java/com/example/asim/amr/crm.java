@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -56,6 +57,7 @@ public class crm extends Activity {
     CheckBox chkSAverage,chkSGood,chkSExellent;
     CheckBox chkDAverage,chkDGood,chkDExellent;
     CheckBox chkAAverage,chkAGood,chkAExellent;
+    RatingBar rbFood,rbPortion,rbService,rbDecor,rbAtmosphere;
     Context context;
     static EditText  txtDate;
     Button cmdCancel,cmdUpdate;
@@ -77,7 +79,13 @@ public class crm extends Activity {
         chkDinner=(CheckBox) findViewById(R.id.Dinner);
         chkOther=(CheckBox) findViewById(R.id.Other);
 
-        chkFoodAverage=(CheckBox) findViewById(R.id.Average);
+        rbFood=(RatingBar) findViewById(R.id.foodrating);
+        rbPortion=(RatingBar) findViewById(R.id.portionrating);
+        rbService=(RatingBar) findViewById(R.id.servicerating);
+        rbDecor=(RatingBar) findViewById(R.id.decorrating);
+        rbAtmosphere=(RatingBar) findViewById(R.id.atmosphererating);
+
+        /*chkFoodAverage=(CheckBox) findViewById(R.id.Average);
         chkFoodGood=(CheckBox) findViewById(R.id.Good);
         chkFoodExellent=(CheckBox) findViewById(R.id.Excellent);
 
@@ -96,6 +104,7 @@ public class crm extends Activity {
         chkAAverage=(CheckBox) findViewById(R.id.AAverage);
         chkAGood=(CheckBox) findViewById(R.id.AGood);
         chkAExellent=(CheckBox) findViewById(R.id.AExcellent);
+        */
 
         txtDate=(EditText) findViewById(R.id.txtDate);
         txtDate.setText(utility_functions.convertDateToString(utility_functions.getCurrentDate(context),"yyyy-MM-dd"));
@@ -161,141 +170,7 @@ public class crm extends Activity {
             }
         });
 
-        chkFoodAverage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkFoodGood.setChecked(false);
-                    chkFoodExellent.setChecked(false);
-                }
-            }
-        });
-        chkFoodGood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkFoodAverage.setChecked(false);
-                    chkFoodExellent.setChecked(false);
-                }
-            }
-        });
-        chkFoodExellent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkFoodAverage.setChecked(false);
-                    chkFoodGood.setChecked(false);
-                }
-            }
-        });
-        chkPAverage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkPGood.setChecked(false);
-                    chkPExellent.setChecked(false);
-                }
-            }
-        });
-        chkPGood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkPAverage.setChecked(false);
-                    chkPExellent.setChecked(false);
-                }
-            }
-        });
-        chkPExellent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkPAverage.setChecked(false);
-                    chkPGood.setChecked(false);
-                }
-            }
-        });
-        chkSAverage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkSGood.setChecked(false);
-                    chkSExellent.setChecked(false);
-                }
-            }
-        });
-        chkSGood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkSAverage.setChecked(false);
-                    chkSExellent.setChecked(false);
-                }
-            }
-        });
-        chkSExellent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkSAverage.setChecked(false);
-                    chkSGood.setChecked(false);
-                }
-            }
-        });
-        chkDAverage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkDGood.setChecked(false);
-                    chkDExellent.setChecked(false);
-                }
-            }
-        });
-        chkDGood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkDAverage.setChecked(false);
-                    chkDExellent.setChecked(false);
-                }
-            }
-        });
-        chkDExellent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkDAverage.setChecked(false);
-                    chkDGood.setChecked(false);
-                }
-            }
-        });
-        chkAAverage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkAGood.setChecked(false);
-                    chkAExellent.setChecked(false);
-                }
-            }
-        });
-        chkAGood.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkAAverage.setChecked(false);
-                    chkAExellent.setChecked(false);
-                }
-            }
-        });
-        chkAExellent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkAAverage.setChecked(false);
-                    chkAGood.setChecked(false);
-                }
-            }
-        });
+
         cmdCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -311,9 +186,8 @@ public class crm extends Activity {
                 PreparedStatement stmt;
                 try {
                     MyCon.setAutoCommit(false);
-                    strQuery = "INSERT INTO Customer_Feedback(DT,Name,Profession,Contact,Address,Email,Suggestion,Breakfast,Lunch,Dinner,Other,Food_Average" +
-                            ",Food_Good,Food_Excellent,Portion_Average,Portion_Good,Portion_Excellent,Service_Average,Service_Good,Service_Excellent" +
-                            ",Decor_Average,Decor_Good,Decor_Excellent,Atmosphere_Average,Atmosphere_Good,Atmosphere_Excellent,UserName,MachineName,Table_No) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    strQuery = "INSERT INTO Customer_Feedback(DT,Name,Profession,Contact,Address,Email,Suggestion,Breakfast,Lunch,Dinner,Other" +
+                            ",Food_Rating,Portion_Rating,Service_Rating,Decor_Rating,Atmosphere_Rating,UserName,MachineName,Table_No) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     stmt = MyCon.prepareStatement(strQuery);
                     java.sql.Date myDT=java.sql.Date.valueOf(txtDate.getText().toString());//utility_functions.convertStringToSQLDate(txtDate.getText().toString(),context);//null;//java.sql.Date.valueOf(txtDate.getText().toString());
                     //utility_functions.convertStringToSQLDate();
@@ -328,29 +202,16 @@ public class crm extends Activity {
                     stmt.setBoolean(9,chkLunch.isChecked());
                     stmt.setBoolean(10,chkDinner.isChecked());
                     stmt.setBoolean(11,chkOther.isChecked());
-                    stmt.setBoolean(12,chkFoodAverage.isChecked());
-                    stmt.setBoolean(13,chkFoodGood.isChecked());
-                    stmt.setBoolean(14,chkFoodExellent.isChecked());
 
-                    stmt.setBoolean(15,chkPAverage.isChecked());
-                    stmt.setBoolean(16,chkPGood.isChecked());
-                    stmt.setBoolean(17,chkPExellent.isChecked());
+                    stmt.setDouble(12, rbFood.getRating());
+                    stmt.setDouble(13, rbPortion.getRating());
+                    stmt.setDouble(14, rbService.getRating());
+                    stmt.setDouble(15, rbDecor.getRating());
+                    stmt.setDouble(16, rbAtmosphere.getRating());
 
-                    stmt.setBoolean(18,chkSAverage.isChecked());
-                    stmt.setBoolean(19,chkSGood.isChecked());
-                    stmt.setBoolean(20,chkSExellent.isChecked());
-
-                    stmt.setBoolean(21,chkDAverage.isChecked());
-                    stmt.setBoolean(22,chkDGood.isChecked());
-                    stmt.setBoolean(23,chkDExellent.isChecked());
-
-                    stmt.setBoolean(24,chkAAverage.isChecked());
-                    stmt.setBoolean(25,chkAGood.isChecked());
-                    stmt.setBoolean(26,chkAExellent.isChecked());
-
-                    stmt.setString(27,"Android");
-                    stmt.setString(28,"Android");
-                    stmt.setString(29,txtTableNo.getText().toString());
+                    stmt.setString(17,"Android");
+                    stmt.setString(18,"Android");
+                    stmt.setString(19,txtTableNo.getText().toString());
                     stmt.addBatch();
                     stmt.executeBatch();
                     MyCon.commit();

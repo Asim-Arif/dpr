@@ -19,4 +19,6 @@
     <color name="colorAccent">#383838</color>
     <color name="colorPrimary">#b60000</color>
     <color name="colorPrimaryDark">#9e0000</color>
+    <color name="lightGrey">#d3d3d3</color>
+    <color name="duskYellow">#ffc922</color>
 </resources>
