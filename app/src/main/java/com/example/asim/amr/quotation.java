@@ -342,9 +342,9 @@ public class quotation extends Activity {
                 /*b1.setHeight(70);
                 b1.setWidth(218);*/
                 b1.setTextColor(Color.WHITE);
-                if (rs.getBoolean("Not_Available")){
+                /*if (rs.getBoolean("Not_Available")){
                     b1.setBackgroundColor(Color.BLACK);
-                }
+                }*/
                 menuLayout.addView(b1,params);
 
                 b1.setOnClickListener(new View.OnClickListener() {
@@ -363,13 +363,13 @@ public class quotation extends Activity {
     }
     private void addItemToLV(int iFMID)
     {
-        boolean bNotAvailable=false;
+        /*boolean bNotAvailable=false;
         bNotAvailable = utility_functions.getSingleBooleanValue("Not_Available","FinalMaterials"," WHERE EntryID="+Integer.toString(iFMID),context);
         if (bNotAvailable)
         {
             Message.message(context,"Not Available");
             return;
-        }
+        }*/
         DBHelper myDBH=new DBHelper();
         Connection MyCon = myDBH.connectionclass(getApplicationContext());        // Connect to database
         String query = "SELECT * FROM FinalMaterials WHERE EntryID="+Integer.toString(iFMID);

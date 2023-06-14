@@ -51,7 +51,7 @@ public class crm extends Activity {
     PreparedStatement stmt;
     ResultSet rs;
     SimpleAdapter myCursorAdapter;
-    CheckBox chkBreakFast,chkLunch,chkDinner,chkOther;
+
     CheckBox chkFoodAverage,chkFoodGood,chkFoodExellent;
     CheckBox chkPAverage,chkPGood,chkPExellent;
     CheckBox chkSAverage,chkSGood,chkSExellent;
@@ -74,16 +74,10 @@ public class crm extends Activity {
         cmdCancel=(Button) findViewById(R.id.cmdCancel);
         cmdUpdate=(Button) findViewById(R.id.cmdUpdate);
 
-        chkBreakFast=(CheckBox) findViewById(R.id.Breakfast);
-        chkLunch=(CheckBox) findViewById(R.id.Lunch);
-        chkDinner=(CheckBox) findViewById(R.id.Dinner);
-        chkOther=(CheckBox) findViewById(R.id.Other);
-
         rbFood=(RatingBar) findViewById(R.id.foodrating);
-        rbPortion=(RatingBar) findViewById(R.id.portionrating);
+
         rbService=(RatingBar) findViewById(R.id.servicerating);
-        rbDecor=(RatingBar) findViewById(R.id.decorrating);
-        rbAtmosphere=(RatingBar) findViewById(R.id.atmosphererating);
+
 
         /*chkFoodAverage=(CheckBox) findViewById(R.id.Average);
         chkFoodGood=(CheckBox) findViewById(R.id.Good);
@@ -107,14 +101,14 @@ public class crm extends Activity {
         */
 
         txtDate=(EditText) findViewById(R.id.txtDate);
-        txtDate.setText(utility_functions.convertDateToString(utility_functions.getCurrentDate(context),"yyyy-MM-dd"));
+        //txtDate.setText(utility_functions.convertDateToString(utility_functions.getCurrentDate(context),"yyyy-MM-dd"));
+        txtDate.setText(utility_functions.convertDateToString(Calendar.getInstance().getTime(),"yyyy-MM-dd HH:mm"));
+
+        txtDate.setTag(utility_functions.convertDateToString(utility_functions.getCurrentDate(context),"yyyy-MM-dd"));
+
         txtTableNo=(EditText) findViewById(R.id.txtTableNo);
         txtName=(EditText) findViewById(R.id.txtName);
-        txtProfession=(EditText) findViewById(R.id.txtProfession);
         txtContact=(EditText) findViewById(R.id.txtContact);
-        txtAddress=(EditText) findViewById(R.id.txtAddress);
-        txtEmail=(EditText) findViewById(R.id.txtEmail);
-        txtSuggestion=(EditText) findViewById(R.id.txtSuggestion);
 
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,47 +123,6 @@ public class crm extends Activity {
 
             }
         });
-        chkBreakFast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkLunch.setChecked(false);
-                    chkDinner.setChecked(false);
-                    chkOther.setChecked(false);
-                }
-            }
-        });
-        chkLunch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkBreakFast.setChecked(false);
-                    chkDinner.setChecked(false);
-                    chkOther.setChecked(false);
-                }
-            }
-        });
-        chkDinner.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkBreakFast.setChecked(false);
-                    chkLunch.setChecked(false);
-                    chkOther.setChecked(false);
-                }
-            }
-        });
-        chkOther.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    chkBreakFast.setChecked(false);
-                    chkLunch.setChecked(false);
-                    chkDinner.setChecked(false);
-                }
-            }
-        });
-
 
         cmdCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,25 +142,25 @@ public class crm extends Activity {
                     strQuery = "INSERT INTO Customer_Feedback(DT,Name,Profession,Contact,Address,Email,Suggestion,Breakfast,Lunch,Dinner,Other" +
                             ",Food_Rating,Portion_Rating,Service_Rating,Decor_Rating,Atmosphere_Rating,UserName,MachineName,Table_No) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     stmt = MyCon.prepareStatement(strQuery);
-                    java.sql.Date myDT=java.sql.Date.valueOf(txtDate.getText().toString());//utility_functions.convertStringToSQLDate(txtDate.getText().toString(),context);//null;//java.sql.Date.valueOf(txtDate.getText().toString());
+                    java.sql.Date myDT=java.sql.Date.valueOf(txtDate.getTag().toString());//utility_functions.convertStringToSQLDate(txtDate.getText().toString(),context);//null;//java.sql.Date.valueOf(txtDate.getText().toString());
                     //utility_functions.convertStringToSQLDate();
                     stmt.setDate(1, myDT);
                     stmt.setString(2, txtName.getText().toString());
-                    stmt.setString(3, txtProfession.getText().toString());
+                    stmt.setString(3, "");
                     stmt.setString(4, txtContact.getText().toString());
-                    stmt.setString(5, txtAddress.getText().toString());
-                    stmt.setString(6, txtEmail.getText().toString());
-                    stmt.setString(7, txtSuggestion.getText().toString());
-                    stmt.setBoolean(8,chkBreakFast.isChecked());
-                    stmt.setBoolean(9,chkLunch.isChecked());
-                    stmt.setBoolean(10,chkDinner.isChecked());
-                    stmt.setBoolean(11,chkOther.isChecked());
+                    stmt.setString(5, "");
+                    stmt.setString(6, "");
+                    stmt.setString(7, "");
+                    stmt.setBoolean(8,false);
+                    stmt.setBoolean(9,false);
+                    stmt.setBoolean(10,false);
+                    stmt.setBoolean(11,false);
 
                     stmt.setDouble(12, rbFood.getRating());
-                    stmt.setDouble(13, rbPortion.getRating());
+                    stmt.setDouble(13, 0.0);
                     stmt.setDouble(14, rbService.getRating());
-                    stmt.setDouble(15, rbDecor.getRating());
-                    stmt.setDouble(16, rbAtmosphere.getRating());
+                    stmt.setDouble(15, 0.0);
+                    stmt.setDouble(16, 0.0);
 
                     stmt.setString(17,"Android");
                     stmt.setString(18,"Android");

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:weightSum="13"
     android:id="@+id/ll_main"
+    android:background="@color/crmbackground"
     >
 
     <LinearLayout
@@ -134,49 +135,6 @@
 
 
             <TextView
-                android:id="@+id/tvProfession"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/profession"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:paddingLeft="5dp" />
-
-            <EditText
-                android:id="@+id/txtProfession"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="5dp"
-                android:textSize="14dp"
-                android:hint="@string/profession" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:baselineAligned="false"
-        android:id="@+id/ll_line2"
-        android:layout_weight="1"
-        >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:layout_weight="4">
-
-            <TextView
                 android:id="@+id/tvContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -184,9 +142,7 @@
                 android:text="@string/contact"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
-                android:paddingLeft="5dp"
-                />
-
+                android:paddingLeft="5dp" />
 
             <EditText
                 android:id="@+id/txtContact"
@@ -195,220 +151,14 @@
                 android:background="@drawable/edittext_border"
                 android:padding="5dp"
                 android:textSize="14dp"
-                android:hint="@string/contact"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:layout_weight="8">
-
-            <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/address"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                />
-
-
-            <EditText
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="5dp"
-                android:textSize="14dp"
-                android:hint="@string/address"
-                />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:baselineAligned="false"
-        android:id="@+id/ll_line3"
-        android:layout_weight="1"
-        >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:layout_weight="4">
-
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/email"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                />
-
-
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="5dp"
-                android:textSize="14dp"
-                android:hint="@string/email"
-                />
-
-
-        </LinearLayout>
-
-
-            <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:layout_weight="8">
-
-            <TextView
-                android:id="@+id/tvSuggestion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/suggestion"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:paddingLeft="5dp"
-                />
-
-
-            <EditText
-                android:id="@+id/txtSuggestion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
-                android:padding="5dp"
-                android:textSize="14dp"
-                android:hint="@string/suggestion"
-                />
-
+                android:hint="@string/contact" />
 
         </LinearLayout>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:baselineAligned="false"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/ll_line4"
-        android:layout_weight="0.6"
-        android:weightSum="5"
-        android:background="@drawable/edittext_border"
-        >
-            <TextView
-                android:id="@+id/tvType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/Type"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textSize="22dp"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="4"
-                />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:weightSum="4"
-                >
-                <CheckBox
-                    android:id="@+id/Breakfast"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Breakfast"
-                    android:textColor="@color/blue"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="0dp"
-                    android:layout_weight="1"
-                    />
-                <CheckBox
-                    android:id="@+id/Lunch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Lunch"
-                    android:textColor="@color/blue"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    />
-
-                <CheckBox
-                    android:id="@+id/Dinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Dinner"
-                    android:textColor="@color/blue"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    />
-
-
-                <CheckBox
-                    android:id="@+id/Other"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Other"
-                    android:textColor="@color/blue"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    />
-
-            </LinearLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -419,8 +169,8 @@
         android:layout_marginTop="2dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/edittext_border"
         android:id="@+id/ll_feedback_main"
+        android:background="@color/crmbackground"
         >
         <LinearLayout
             android:layout_width="0dp"
@@ -430,7 +180,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="2"
+
+            >
 
             <TextView
                 android:id="@+id/txtFood"
@@ -452,9 +204,8 @@
                 android:layout_gravity="center"
                 android:numStars="5"
                 android:stepSize="0.5"
-                android:rating="4"
+                android:rating="0"
                 android:theme="@style/RatingBar"
-                style="?android:attr/ratingBarStyleSmall"
                 android:isIndicator="false"
 
                 />
@@ -469,47 +220,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="2"
 
-            <TextView
-                android:id="@+id/Portion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/Portion"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_marginBottom="5dp"
-                android:textSize="20dp"
-                />
-
-            <RatingBar
-                android:id="@+id/portionrating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="?android:attr/ratingBarStyleSmall"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:rating="4"
-                android:theme="@style/RatingBar"
-                android:isIndicator="false"
-
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:layout_weight="2">
+            >
 
             <TextView
                 android:id="@+id/Service"
@@ -530,97 +243,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                style="?android:attr/ratingBarStyleSmall"
                 android:numStars="5"
                 android:stepSize="0.5"
-                android:rating="4"
+                android:rating="0"
                 android:theme="@style/RatingBar"
                 android:isIndicator="false"
                 />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:layout_weight="2">
 
-            <TextView
-                android:id="@+id/Decor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/Decor"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_marginBottom="5dp"
-                android:textSize="20dp"
-                />
-
-
-            <RatingBar
-                android:id="@+id/decorrating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="?android:attr/ratingBarStyleSmall"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:rating="4"
-                android:theme="@style/RatingBar"
-                android:isIndicator="false"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <TextView
-                android:id="@+id/Atmosphere"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/Atmosphere"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:layout_marginBottom="5dp"
-                android:textSize="20dp"
-                />
-
-            <RatingBar
-                android:id="@+id/atmosphererating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                style="?android:attr/ratingBarStyleSmall"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:rating="4"
-                android:theme="@style/RatingBar"
-                android:isIndicator="false"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:baselineAligned="false"

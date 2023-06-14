@@ -1130,6 +1130,21 @@ public class pos extends Activity {
     }
     private void CalculateBill()
     {
+        int iTableNo=0;
+        iTableNo= Integer.parseInt(txtTableNo.getText().toString());
+
+        int iSCharges=0;
+        double dSChargesPer=0;
+        boolean bSCharges_Enabled=false;
+        if (iTableNo!=0)
+        {
+            bSCharges_Enabled = utility_functions.getSingleBooleanValue("Service_Charges_Applicable", "Hall_List", " WHERE " + Integer.toString(iTableNo) + " BETWEEN TableFrom AND TableTo",context);
+
+            if (bSCharges_Enabled){
+                dSChargesPer = utility_functions.getSingleDoubleValue("Service_Charges_Rate","Hall_List"," WHERE " + Integer.toString(iTableNo) + " BETWEEN TableFrom AND TableTo",context);
+            }
+        }
+
         int i;
         double iTotalBill=0,iTotalBill_5Percent,iTotalBill_16Percent;
         for (i=0;i<data.size();i++)
@@ -1144,6 +1159,17 @@ public class pos extends Activity {
         }
         iTotalBill_5Percent=iTotalBill+(iTotalBill*.05);
         iTotalBill_16Percent=iTotalBill+(iTotalBill*.16);
+
+        int iMinBillSC=0;
+        iMinBillSC=Integer.parseInt(utility_functions.getSingleStringValue("DataValue","GeneralData"," WHERE DataName='Min_Bill_Service_Charges'",context));
+
+        if (bSCharges_Enabled)
+            if (iTotalBill>iMinBillSC)
+                iSCharges=(int) Math.round(iTotalBill*(dSChargesPer /100));
+
+        iTotalBill_5Percent+=iSCharges;
+        iTotalBill_16Percent+=iSCharges;
+
         txtBill5.setText(String.format("%.0f",iTotalBill_5Percent));
         txtBill16.setText(String.format("%.0f",iTotalBill_16Percent));
     }

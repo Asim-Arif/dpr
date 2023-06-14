@@ -227,6 +227,23 @@ public class utility_functions {
         }
         return date;
     }
+    public static Date getCurrentDateTime(Context context){
+        final java.util.Calendar c=java.util.Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH)+1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        String myDT;
+        myDT=String.format("%02d",month)+'-'+String.format("%02d",day)+'-'+Integer.toString(year);
+        java.util.Date date=null;
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
+        try{
+            date = sdf1.parse(myDT);
+        } catch (java.text.ParseException PE){
+            Message.message(context,PE.toString());
+        }
+        return date;
+    }
     public static String convertDateToString(Date myDT,String strDateFormat){
         SimpleDateFormat sdf1 = new SimpleDateFormat(strDateFormat);
         return sdf1.format(myDT).toString();
