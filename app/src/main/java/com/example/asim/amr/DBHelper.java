@@ -64,8 +64,8 @@ public class DBHelper {
         //strSQLPort="1433";
         //
 
-        //Laptop Settings
-        //strSQLIP="192.168.10.19";
+        //Laptop Settings Asim-PC\SQL2014STD
+        //strSQLIP="192.168.10.14";
         //strSQLPort="51178";
         //
 

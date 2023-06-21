@@ -109,6 +109,7 @@ public class crm extends Activity {
         txtTableNo=(EditText) findViewById(R.id.txtTableNo);
         txtName=(EditText) findViewById(R.id.txtName);
         txtContact=(EditText) findViewById(R.id.txtContact);
+        txtSuggestion=(EditText) findViewById(R.id.txtSuggestion);
 
         txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +151,7 @@ public class crm extends Activity {
                     stmt.setString(4, txtContact.getText().toString());
                     stmt.setString(5, "");
                     stmt.setString(6, "");
-                    stmt.setString(7, "");
+                    stmt.setString(7, txtSuggestion.getText().toString());
                     stmt.setBoolean(8,false);
                     stmt.setBoolean(9,false);
                     stmt.setBoolean(10,false);

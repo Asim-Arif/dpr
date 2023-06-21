@@ -1131,7 +1131,8 @@ public class pos extends Activity {
     private void CalculateBill()
     {
         int iTableNo=0;
-        iTableNo= Integer.parseInt(txtTableNo.getText().toString());
+        if (!txtTableNo.getText().toString().equals(""))
+            iTableNo= Integer.parseInt(txtTableNo.getText().toString());
 
         int iSCharges=0;
         double dSChargesPer=0;

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Custom Softwares/Android/AMR/app/src/main/res/drawable/crm_button_border.xml" value="0.1935" />
+        <entry key="..\:/Custom Softwares/Android/AMR/app/src/main/res/drawable/edittext_border.xml" value="0.1935" />
         <entry key="..\:/Custom Softwares/Android/AMR/app/src/main/res/drawable/ratingbar.xml" value="0.1935" />
         <entry key="..\:/Custom Softwares/Android/AMR/app/src/main/res/layout/crm.xml" value="0.26614583333333336" />
         <entry key="..\:/Custom Softwares/Android/AMR/app/src/main/res/layout/pos.xml" value="0.26510416666666664" />

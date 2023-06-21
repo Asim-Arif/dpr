@@ -1128,6 +1128,22 @@ public class quotation extends Activity {
             return;
         }
 
+        if (txtServer.getText().toString().equals(""))
+        {
+            Message.message(context,"Please Enter Total Guests.");
+            return;
+        }
+        if (txtOrderFrom.getText().toString().equals(""))
+        {
+            Message.message(context,"Please Enter Guest Name.");
+            return;
+        }
+        if (txtOrderDuration.getText().toString().equals(""))
+        {
+            Message.message(context,"Please Enter Booking Date/Time.");
+            return;
+        }
+
         int iHallID=utility_functions.getSingleIntValue("EntryID","Hall_List"," WHERE Hall_Name='"+ strHallName+"'",context);
         String strHallID=String.valueOf(iHallID);
 

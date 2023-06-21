@@ -35,8 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/date"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/green"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 />
 
 
@@ -49,6 +50,7 @@
                 android:textSize="14dp"
                 android:gravity="center"
                 android:hint="@string/date"
+                android:maxLines="1"
                 />
 
 
@@ -70,8 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/tableno"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/green"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 />
 
             <EditText
@@ -82,7 +85,10 @@
                 android:padding="5dp"
                 android:textSize="14dp"
                 android:gravity="center"
-                android:hint="@string/tableno" />
+                android:hint="@string/tableno"
+                android:inputType="number"
+                android:maxLines="1"
+                />
 
 
         </LinearLayout>
@@ -105,8 +111,9 @@
                 android:layout_gravity="center"
                 android:text="@string/name"
                 android:paddingLeft="5dp"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/green"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 />
 
 
@@ -118,6 +125,8 @@
                 android:padding="5dp"
                 android:textSize="14dp"
                 android:hint="@string/name"
+                android:inputType="text"
+                android:maxLines="1"
                 />
 
 
@@ -140,9 +149,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/contact"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/green"
                 android:textStyle="bold"
-                android:paddingLeft="5dp" />
+                android:paddingLeft="5dp"
+                android:textAlignment="center"
+
+                />
 
             <EditText
                 android:id="@+id/txtContact"
@@ -151,10 +163,60 @@
                 android:background="@drawable/edittext_border"
                 android:padding="5dp"
                 android:textSize="14dp"
-                android:hint="@string/contact" />
+                android:hint="@string/contact"
+                android:inputType="text"
+                android:maxLines="1"
+                />
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:id="@+id/ll_line2"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/tvSuggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/suggestion"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                />
+
+
+            <EditText
+                android:id="@+id/txtSuggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_border"
+                android:padding="5dp"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:hint="@string/suggestion"
+                android:inputType="text"
+                android:maxLines="1"
+                />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -165,8 +227,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:baselineAligned="false"
-        android:layout_weight="5"
-        android:layout_marginTop="2dp"
+        android:layout_weight="9"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/ll_feedback_main"
@@ -207,7 +269,6 @@
                 android:rating="0"
                 android:theme="@style/RatingBar"
                 android:isIndicator="false"
-
                 />
 
         </LinearLayout>
@@ -242,6 +303,7 @@
                 android:id="@+id/servicerating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_gravity="center"
                 android:numStars="5"
                 android:stepSize="0.5"
@@ -261,8 +323,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:baselineAligned="false"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_weight="2"
         android:weightSum="2"
         android:id="@+id/ll_savecancel"
@@ -275,9 +338,13 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:text="Update"
-            android:textColor="@color/colorBlack"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/crm_button_border"
+            android:textColor="@color/green"
             android:textStyle="bold"
             android:textAlignment="center"
+            android:textSize="26sp"
             />
 
         <Button
@@ -287,11 +354,14 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:text="Cancel"
-            android:textColor="@color/colorBlack"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/crm_button_border"
+
+            android:textColor="@color/green"
             android:textStyle="bold"
+            android:textSize="26sp"
             android:textAlignment="center"
             />
-
-
     </LinearLayout>
 </LinearLayout>
