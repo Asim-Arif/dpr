@@ -18,6 +18,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 
 import android.util.TypedValue;
@@ -76,7 +77,7 @@ public class quotation extends Activity {
     }
     ArrayList<tableData> TableData_List=new ArrayList<tableData>();
     //String strDeviceName="Emulator";
-    String strDeviceName = BluetoothAdapter.getDefaultAdapter().getName();
+    String strDeviceName = "";//BluetoothAdapter.getDefaultAdapter().getName();
     int iSalesTax;
     int iMilliSeconds;
 
@@ -89,6 +90,7 @@ public class quotation extends Activity {
 
         setContentView(R.layout.quotation);
         context = this.getBaseContext();
+        strDeviceName= Settings.Global.getString(getContentResolver(), Settings.Global.DEVICE_NAME);
 
         cmbHall=(Spinner) findViewById(R.id.cmbHall);
         fillHalls();

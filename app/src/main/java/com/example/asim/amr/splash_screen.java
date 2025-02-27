@@ -18,10 +18,10 @@ public class splash_screen extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.splash_screen);
 
-        String uri = "@mipmap/amr_logo";  // where myresource (without the extension) is the file
+        String uri = "@mipmap/logo_small";  // where myresource (without the extension) is the file
         String strVariant=getString(R.string.app_name);
-        if (strVariant.equals("AMR"))
-            uri = "@mipmap/amr_logo";
+        if (strVariant.equals("DP"))
+            uri = "@mipmap/logo_small";
         else if (strVariant.equals("Cafe"))
             uri = "@mipmap/cafe_logo";
         else if (strVariant.equals("EventHall"))

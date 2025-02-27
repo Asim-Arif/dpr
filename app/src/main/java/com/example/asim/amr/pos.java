@@ -5,7 +5,7 @@ package com.example.asim.amr;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-
+import android.provider.Settings;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -64,7 +64,8 @@ public class pos extends Activity {
     }
     ArrayList<tableData> TableData_List=new ArrayList<tableData>();
     //String strDeviceName="Emulator";
-    String strDeviceName = BluetoothAdapter.getDefaultAdapter().getName();
+    //String strDeviceName = "Asim";//BluetoothAdapter.getDefaultAdapter().getName();
+    String strDeviceName = "";//Settings.Global.getString(getContentResolver(), Settings.Global.DEVICE_NAME);
     int iSalesTax;
     int iMilliSeconds;
 
@@ -76,6 +77,8 @@ public class pos extends Activity {
 
         setContentView(R.layout.pos);
         context = this.getBaseContext();
+
+        strDeviceName=Settings.Global.getString(getContentResolver(), Settings.Global.DEVICE_NAME);
 
         txtTableNo=(EditText) findViewById(R.id.txtTableno);
         txtServer=(EditText)  findViewById(R.id.txtServer);
@@ -570,24 +573,27 @@ public class pos extends Activity {
         final java.util.Calendar CurrentTime=java.util.Calendar.getInstance();
         java.util.Date DT=null;
         DT=utility_functions.getCurrentDate(context);
+        java.sql.Date sqlDate=new java.sql.Date(DT.getTime());
         String strDT="";
-        Date DTInvoice=null;
-        if (CurrentTime.get(Calendar.HOUR)<7)
+        java.sql.Date DTInvoice=null;
+        if (CurrentTime.get(Calendar.HOUR_OF_DAY)<7)
         {
             CurrentTime.add(Calendar.DATE,-1);
+            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
             strDT=utility_functions.convertDateToString(CurrentTime.getTime(),"MMM-dd-yyyy");
             //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
         }
         else
         {
+            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
             strDT=utility_functions.convertDateToString(DT,"yyyy-MM-dd HH:mm:ss z");
             //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
         }
         int lInvNoFromPending=0,lInvNoFromSales=0,lInvoiceNo=0;
         if (txtServer.getTag().toString().equals(""))
         {
-            lInvNoFromPending = utility_functions.getSingleIntValue("MAX(InvoiceNo)","PendingSales","",context);
-            lInvNoFromSales = utility_functions.getSingleIntValue("MAX(InvoiceNo)", "ItemSales", " WHERE DT='" + strDT + "'",context);
+            lInvNoFromPending = utility_functions.getSingleIntValue("MAX(InvoiceNo)","PendingSales","WHERE CAST(CAST(DTEntry_For_InvoiceNo AS DATE) AS DATETIME)='"+DTInvoice.toString()+"'",context);
+            lInvNoFromSales = utility_functions.getSingleIntValue("MAX(InvoiceNo)", "ItemSales", " WHERE DT='" + DTInvoice.toString() + "'",context);
             if (lInvNoFromPending > lInvNoFromSales)
                 lInvoiceNo = lInvNoFromPending;
             else
@@ -634,7 +640,7 @@ public class pos extends Activity {
         try {
             MyCon.setAutoCommit(false);
             if (lPendingSaleEntryID==0) {
-                strQuery = "INSERT INTO PendingSales(ButtonNumber,Server,TableNo,Payable,Received,Status,UserName,MachineName,SaleType,DrinksUpsize,FriesUpsize,DrinksUpsizeRate,FriesUpsizeRate,InvoiceNo,ManualSTax,STaxAmt) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                strQuery = "INSERT INTO PendingSales(ButtonNumber,Server,TableNo,Payable,Received,Status,UserName,MachineName,SaleType,DrinksUpsize,FriesUpsize,DrinksUpsizeRate,FriesUpsizeRate,InvoiceNo,ManualSTax,STaxAmt,DTEntry_Tab,DT_For_InvoiceNo,DTEntry_For_InvoiceNo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 stmt = MyCon.prepareStatement(strQuery);
                 stmt.setInt(1, Integer.parseInt((txtTableNo.getText().toString())));
                 stmt.setString(2, txtServer.getText().toString());
@@ -652,6 +658,9 @@ public class pos extends Activity {
                 stmt.setInt(14, lInvoiceNo);
                 stmt.setInt(15, 0);
                 stmt.setInt(16, iSalesTax);
+                stmt.setDate(17,sqlDate);
+                stmt.setString(18,strDT);
+                stmt.setDate(19,DTInvoice);
                 stmt.addBatch();
                 stmt.executeBatch();
 

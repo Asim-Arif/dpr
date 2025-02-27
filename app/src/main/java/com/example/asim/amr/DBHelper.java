@@ -46,9 +46,9 @@ public class DBHelper {
         //Allah Malak Settings..
         //strSQLIP="192.168.1.116";
         //strSQLPort="1433";
-        //AMR
-        //strSQLIP="192.168.1.15";
-        //strSQLPort="1433";
+        //Dubai Palace
+        strSQLIP="192.168.0.13";
+        strSQLPort="1433";
 
         //Cafe
         //strSQLIP="192.168.1.16";
@@ -65,7 +65,7 @@ public class DBHelper {
         //
 
         //Laptop Settings Asim-PC\SQL2014STD
-        //strSQLIP="192.168.10.14";
+        //strSQLIP="192.168.0.16";
         //strSQLPort="51178";
         //
 

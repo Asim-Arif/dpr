@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
 
-    compileSdkVersion 26
+    compileSdkVersion 33
     //buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.example.asim.rms"
-        minSdkVersion 24
-        targetSdkVersion 26
+        minSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -23,19 +23,19 @@ android {
     productFlavors{
         AMR{
             dimension 'mode'
-            resValue "string", "app_name", "AMR"
-            resValue "string", "sql_ip", "192.168.1.15"
-            applicationId 'com.example.asim.amr'
-            versionName "$defaultConfig.versionName" + ".AMR"
+            resValue "string", "app_name", "DPR"
+            resValue "string", "sql_ip", "192.168.0.13"
+            applicationId 'com.example.asim.dp'
+            versionName "$defaultConfig.versionName" + ".DP"
             manifestPlaceholders = [
-                    appIcon: "@mipmap/amr_logo"
+                    appIcon: "@mipmap/logo_small"
             ]
         }
 
         Cafe{
             dimension 'mode'
             resValue "string", "app_name", "Cafe"
-            resValue "string", "sql_ip", "192.168.1.16"
+            resValue "string", "sql_ip", "192.168.0.13"
             applicationId 'com.example.asim.cafe'
             versionName "$defaultConfig.versionName" + ".Cafe"
             manifestPlaceholders = [
@@ -45,7 +45,7 @@ android {
         eventhall{
             dimension 'mode'
             resValue "string", "app_name", "EventHall"
-            resValue "string", "sql_ip", "192.168.1.17"
+            resValue "string", "sql_ip", "192.168.0.13"
             //resValue "string", "sql_ip", "192.168.10.9"
             applicationId 'com.example.asim.eventhall'
             versionName "$defaultConfig.versionName" + ".eventhall"

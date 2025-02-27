@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.asim.amr">
-    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         
         android:allowBackup="true"
@@ -17,14 +17,14 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name="com.example.asim.amr.splash_screen">
+        <activity android:name="com.example.asim.amr.splash_screen" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.asim.amr.MainActivity">
+        <activity android:name="com.example.asim.amr.MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -178,5 +178,5 @@
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>
