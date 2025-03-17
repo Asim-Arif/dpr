@@ -526,7 +526,8 @@ public class pos extends Activity {
 
         int iSaleType=0;
         Button cmdSelected=(Button) findViewById(view.getId());
-        String strTableNo=cmdSelected.getText().toString();
+        //String strTableNo=cmdSelected.getText().toString();
+        String strTableNo=cmdSelected.getTag().toString();
         int iTableNo=Integer.parseInt(strTableNo);
         tableData tableData_Obj=(tableData) TableData_List.get(iTableNo-1);
         //If iStatus=1, it means it holds some data, we need to load pending sale.
