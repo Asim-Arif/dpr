@@ -1,6 +1,8 @@
 
 package com.example.asim.amr;
 
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -42,7 +44,7 @@ import java.util.Map;
 
 public class pos extends Activity {
 
-    EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration,txtBill5,txtBill16;
+    EditText txtTableNo,txtServer,txtOrderFrom,txtOrderDuration,txtNoOfPersons,txtBill5,txtBill16;
     Connection MyCon;
     PreparedStatement stmt;
     ResultSet rs;
@@ -84,6 +86,7 @@ public class pos extends Activity {
         txtServer=(EditText)  findViewById(R.id.txtServer);
         txtOrderFrom=(EditText) findViewById(R.id.txtOrderfrom);
         txtOrderDuration=(EditText) findViewById(R.id.txtOrderduration);
+        txtNoOfPersons=(EditText) findViewById(R.id.txtNoofPersons);
         txtBill5=(EditText) findViewById(R.id.txtTotalBill_5Percent);
         txtBill16=(EditText) findViewById(R.id.txtTotalBill_16Percent);
         /*cmdTable1=(Button)  findViewById(R.id.tbl1);
@@ -524,7 +527,7 @@ public class pos extends Activity {
     }
     public void tbl_btn_click(View view){
 
-        int iSaleType=0;
+
         Button cmdSelected=(Button) findViewById(view.getId());
         //String strTableNo=cmdSelected.getText().toString();
         String strTableNo=cmdSelected.getTag().toString();
@@ -551,6 +554,11 @@ public class pos extends Activity {
             Message.message(context,"No Sale Data !!!");
             return;
         }
+        int iNoOfPersons=0;
+        if (!txtNoOfPersons.getText().equals(""))
+            iNoOfPersons = Integer.parseInt(txtNoOfPersons.getText().toString());
+        String strKS_Remarks=txtNoOfPersons.getTag().toString();
+
         if (txtServer.getText().toString().equals("")){    //New Pending Sale
             String strTableLocked_ComputerName = utility_functions.getSingleStringValue("MachineName","Tables_Locked"," WHERE TableNo='"+strTableNo+"' AND MachineName<>'"+strDeviceName+"'",context);
             if (strTableLocked_ComputerName!="")
@@ -561,6 +569,7 @@ public class pos extends Activity {
             String strServer=utility_functions.getSingleStringValue("WaiterName","POS_Settings"," WHERE MachineName='"+strDeviceName+"'",context);
             txtServer.setText(strServer);
             txtTableNo.setText(strTableNo);
+            showInputDialog(iTableNo,tableData_Obj,strServer,strTableNo,iNoOfPersons,strKS_Remarks);
         }
         else
         {
@@ -569,213 +578,12 @@ public class pos extends Activity {
                 strTableNo = lblTableNo.Caption
                 iSaleType = lblServer.Tag
             */
+            //Comer Here for Edit
 
+            updateTable(iTableNo,tableData_Obj,txtServer.getText().toString(),txtTableNo.getText().toString(),iNoOfPersons,strKS_Remarks);
         }
-        final java.util.Calendar CurrentTime=java.util.Calendar.getInstance();
-        java.util.Date DT=null;
-        DT=utility_functions.getCurrentDate(context);
-        java.sql.Date sqlDate=new java.sql.Date(DT.getTime());
-        String strDT="";
-        java.sql.Date DTInvoice=null;
-        if (CurrentTime.get(Calendar.HOUR_OF_DAY)<7)
-        {
-            CurrentTime.add(Calendar.DATE,-1);
-            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
-            strDT=utility_functions.convertDateToString(CurrentTime.getTime(),"MMM-dd-yyyy");
-            //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
-        }
-        else
-        {
-            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
-            strDT=utility_functions.convertDateToString(DT,"yyyy-MM-dd HH:mm:ss z");
-            //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
-        }
-        int lInvNoFromPending=0,lInvNoFromSales=0,lInvoiceNo=0;
-        if (txtServer.getTag().toString().equals(""))
-        {
-            lInvNoFromPending = utility_functions.getSingleIntValue("MAX(InvoiceNo)","PendingSales","WHERE CAST(CAST(DTEntry_For_InvoiceNo AS DATE) AS DATETIME)='"+DTInvoice.toString()+"'",context);
-            lInvNoFromSales = utility_functions.getSingleIntValue("MAX(InvoiceNo)", "ItemSales", " WHERE DT='" + DTInvoice.toString() + "'",context);
-            if (lInvNoFromPending > lInvNoFromSales)
-                lInvoiceNo = lInvNoFromPending;
-            else
-                lInvoiceNo = lInvNoFromSales;
-
-            lInvoiceNo = lInvoiceNo + 1;
-        }
-        else{
-            lInvoiceNo=Integer.parseInt(txtServer.getTag().toString());
-        }
-        String strOrderFrom_ComputerName="";
-        if (txtOrderFrom.getText().toString().equals("")){
-            strOrderFrom_ComputerName = strDeviceName;
-        }
-        else{
-            strOrderFrom_ComputerName = txtOrderFrom.getText().toString();
-        }
-        txtOrderFrom.setText("");
-        txtOrderDuration.setText("");
-        int iTotalAmount=0;
-        int i;
-        for (i=0;i<data.size();i++){
-            Map<String, String> datanum=(Map<String, String>) data.get(i);
-            int iRate=Integer.parseInt(datanum.get("Rate"));
-            int iQty=Integer.parseInt(datanum.get("Qty"));
-            iTotalAmount=iTotalAmount+(iQty*iRate);
-        }
-        boolean bSTax_Enabled;
-        bSTax_Enabled = utility_functions.getSingleBooleanValue("Sales_Tax_Applicable", "Hall_List", " WHERE " + Integer.toString(iTableNo) + " BETWEEN TableFrom AND TableTo",context);
-        iSalesTax=0;
-        if (bSTax_Enabled){
-            double dSalesTaxPer;
-            dSalesTaxPer = Double.parseDouble(utility_functions.getSingleStringValue("DataValue","GeneralData"," WHERE DataName='SalesTax'",context)) ;
-            iSalesTax=(int) Math.round(iTotalAmount*(dSalesTaxPer /100));
-        }
-
-        boolean bOrderChanged_New=false;
-        String strUserName=utility_functions.getSingleStringValue("UserName","POS_Settings"," WHERE MachineName='"+strDeviceName+"'",context);
-        DBHelper myDBH = new DBHelper();
-        Connection MyCon = myDBH.connectionclass(getApplicationContext());        // Connect to database
-        String strQuery="";
-        int iPS_EntryID=0;
-        PreparedStatement stmt;
-        try {
-            MyCon.setAutoCommit(false);
-            if (lPendingSaleEntryID==0) {
-                strQuery = "INSERT INTO PendingSales(ButtonNumber,Server,TableNo,Payable,Received,Status,UserName,MachineName,SaleType,DrinksUpsize,FriesUpsize,DrinksUpsizeRate,FriesUpsizeRate,InvoiceNo,ManualSTax,STaxAmt,DTEntry_Tab,DT_For_InvoiceNo,DTEntry_For_InvoiceNo) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                stmt = MyCon.prepareStatement(strQuery);
-                stmt.setInt(1, Integer.parseInt((txtTableNo.getText().toString())));
-                stmt.setString(2, txtServer.getText().toString());
-                stmt.setString(3, txtTableNo.getText().toString());
-                stmt.setInt(4, iTotalAmount);
-                stmt.setInt(5, 0);
-                stmt.setInt(6, 0);
-                stmt.setString(7, strUserName);
-                stmt.setString(8, strDeviceName);
-                stmt.setInt(9, iSaleType);
-                stmt.setInt(10, 0);
-                stmt.setInt(11, 0);
-                stmt.setInt(12, 0);
-                stmt.setInt(13, 0);
-                stmt.setInt(14, lInvoiceNo);
-                stmt.setInt(15, 0);
-                stmt.setInt(16, iSalesTax);
-                stmt.setDate(17,sqlDate);
-                stmt.setString(18,strDT);
-                stmt.setDate(19,DTInvoice);
-                stmt.addBatch();
-                stmt.executeBatch();
-
-                iPS_EntryID = utility_functions.getSingleIntValue(MyCon, "MAX(EntryID)", "PendingSales", " WHERE MachineName='" + strDeviceName + "'", context);
-            }
-            else{
-                strQuery = "UPDATE PendingSales SET Payable=?,STaxAmt=? WHERE EntryID=?";
-                stmt = MyCon.prepareStatement(strQuery);
-                stmt.setInt(1, iTotalAmount);
-                stmt.setInt(2, lPendingSaleEntryID);
-                stmt.setInt(3, iSalesTax);
-                stmt.addBatch();
-                stmt.executeBatch();
-                iPS_EntryID=lPendingSaleEntryID;
-            }
-            for (i=0;i<data.size();i++){
-                Map<String, String> datanum=(Map<String, String>) data.get(i);
-                int iEntryID=Integer.parseInt(datanum.get("EntryID"));
-                String strItemName=datanum.get("ItemName");
-                int iFM_EntryID=Integer.parseInt(datanum.get("FM_EntryID"));
-                int iRate=Integer.parseInt(datanum.get("Rate"));
-                int iQty=Integer.parseInt(datanum.get("Qty"));
-                int iPreviouseQty=Integer.parseInt(datanum.get("PreviousQty"));
-                int iTabQty_Saved=Integer.parseInt(datanum.get("TabQty"));
-                String strColumn6Tag=datanum.get("Column6Tag");     //will have "saved" once loaded.
-                int iQtyPrinted=Integer.parseInt(datanum.get("QtyPrinted"));
-                int iTabQty=iTabQty_Saved+iQty-iPreviouseQty;
-                if (iEntryID==0){
-                    strQuery = "INSERT INTO PendingSalesDetail(RefID,Column1,Column1Key,Column1Tag,Column2,Column2Tag,Column3,Column3Tag,Column4,Column4Tag,Column5,Column5Tag,Column6,Column6Tag,QtyPrinted,MachineName_Last,QtyTab,MachineName_Last_Tab) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                    stmt = MyCon.prepareStatement(strQuery);
-                    stmt.setInt(1, iPS_EntryID);
-                    stmt.setString(2,strItemName);
-                    stmt.setString(3, Integer.toString(iFM_EntryID)+"'FM");
-                    stmt.setString(4,"");
-                    stmt.setString(5,Integer.toString(iQty));
-                    stmt.setString(6,"FALSE");
-                    stmt.setString(7,Integer.toString(iRate));
-                    stmt.setString(8,"");
-                    stmt.setString(9,"0");
-                    stmt.setString(10,"");
-                    stmt.setString(11,Integer.toString(iQty*iRate));
-                    stmt.setString(12,"");
-                    stmt.setString(13,"");
-                    stmt.setString(14,strColumn6Tag);
-                    stmt.setString(15,Integer.toString(iQtyPrinted));
-                    stmt.setString(16,strDeviceName);
-                    stmt.setString(17,Integer.toString(iQty));
-                    stmt.setString(18,strDeviceName);
-                    stmt.addBatch();
-                    stmt.executeBatch();
-                    bOrderChanged_New=true;
-                }
-                else{
-                    strQuery = "UPDATE PendingSalesDetail SET Column1=?,Column1Key=?,Column1Tag=?,Column2=?,Column2Tag=?,Column3=?,Column3Tag=?,Column4=?,Column4Tag=?,Column5=?,Column5Tag=?,Column6=?,Column6Tag=?,MachineName_Last=?,QtyTab=?,MachineName_Last_Tab=? WHERE EntryID=?";
-                    stmt = MyCon.prepareStatement(strQuery);
-                    stmt.setString(1,strItemName);
-                    stmt.setString(2, Integer.toString(iFM_EntryID)+"'FM");
-                    stmt.setString(3,"");
-                    stmt.setString(4,Integer.toString(iQty));
-                    stmt.setString(5,"FALSE");
-                    stmt.setString(6,Integer.toString(iRate));
-                    stmt.setString(7,"");
-                    stmt.setString(8,"0");
-                    stmt.setString(9,"");
-                    stmt.setString(10,Integer.toString(iQty*iRate));
-                    stmt.setString(11,"");
-                    stmt.setString(12,"");
-                    stmt.setString(13,strColumn6Tag);
-                    stmt.setString(14,strDeviceName);
-                    stmt.setString(15,Integer.toString(iQty));
-                    stmt.setString(16,strDeviceName);
-                    stmt.setInt(17,iEntryID);
-                    stmt.addBatch();
-                    stmt.executeBatch();
-                    if (iQty>iPreviouseQty){
-                        bOrderChanged_New=true;
-                    }
-                }
-
-            }
-            strQuery = "DELETE FROM Tables_Locked WHERE MachineName=?";
-            stmt = MyCon.prepareStatement(strQuery);
-            stmt.setString(1, strDeviceName);
-            stmt.addBatch();
-            stmt.executeBatch();
-            if (bOrderChanged_New){
-                strQuery = "UPDATE PendingSales SET DTEntry_Last=getDate() WHERE EntryID=?";
-                stmt = MyCon.prepareStatement(strQuery);
-                stmt.setInt(1, lPendingSaleEntryID);
-                stmt.addBatch();
-                stmt.executeBatch();
-            }
-            lPendingSaleEntryID = 0;
-
-            MyCon.commit();
-            data.clear();
-            myCursorAdapter.notifyDataSetChanged();
-            txtTableNo.setText("");
-            txtServer.setText("");
-            txtBill5.setText("");
-            txtBill16.setText("");
-            tableData_Obj.iStatus=1;
-            tableData_Obj.iEntryID=iPS_EntryID;
-            //tableData_Obj.btnTable.setBackgroundColor(Color.YELLOW);
-            tableData_Obj.btnTable.setBackgroundResource(R.drawable.btn_yellow);
-
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-            Message.message(context,e.toString());
-        }
-
     }
+
     private void refreshTables(){
         int i;
         tableData tableData_Obj;
@@ -877,6 +685,10 @@ public class pos extends Activity {
                 txtServer.setTag(rs.getInt("InvoiceNo"));
                 txtOrderFrom.setText(rs.getString("MachineName"));
                 txtOrderDuration.setText(rs.getString("TotalMinutes")+" Mins.");
+
+                txtNoOfPersons.setText(rs.getString("NoOfPersons"));
+                txtNoOfPersons.setTag(rs.getString("KS_Remarks"));
+
                 iSalesTax= rs.getInt("STaxAmt");
                 rs.close();
                 //Lock the Table for others to See...
@@ -1183,5 +995,250 @@ public class pos extends Activity {
 
         txtBill5.setText(String.format("%.0f",iTotalBill_5Percent));
         txtBill16.setText(String.format("%.0f",iTotalBill_16Percent));
+    }
+
+
+    public void showInputDialog(int iTableNo,tableData tableData_Obj,String strServer,String strTableNo,int p_iNoOfPersons,String p_strRemarks) {
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.pending_sale_detail, null);
+
+        // Create EditText instances for number and text inputs
+        EditText txtNoOfPersons = dialogView.findViewById(R.id.edit_number);
+        EditText txtRemarks = dialogView.findViewById(R.id.edit_text);
+        if (p_iNoOfPersons>0)
+            txtNoOfPersons.setText(String.valueOf(p_iNoOfPersons));
+        txtRemarks.setText(p_strRemarks);
+
+        // Build the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        builder.setTitle("Enter Number and Text");
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            String strNoOfPersons = txtNoOfPersons.getText().toString();
+            String strRemarks = txtRemarks.getText().toString();
+            int iNoOfPersons = 0;
+            if (!strNoOfPersons.equals(""))
+                iNoOfPersons = Integer.parseInt(strNoOfPersons);
+
+            updateTable(iTableNo,tableData_Obj,strServer,strTableNo,iNoOfPersons,strRemarks);
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            dialog.dismiss();
+        });
+
+        builder.create().show();
+    }
+
+    private void updateTable(int iTableNo,tableData tableData_Obj,String strServer,String strTableNo,int iNoOfPersons,String strRemarks)
+    {
+        int iSaleType=0;
+        final java.util.Calendar CurrentTime=java.util.Calendar.getInstance();
+        java.util.Date DT=null;
+        DT=utility_functions.getCurrentDate(context);
+        java.sql.Date sqlDate=new java.sql.Date(DT.getTime());
+        String strDT="";
+        java.sql.Date DTInvoice=null;
+        if (CurrentTime.get(Calendar.HOUR_OF_DAY)<7)
+        {
+            CurrentTime.add(Calendar.DATE,-1);
+            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
+            strDT=utility_functions.convertDateToString(CurrentTime.getTime(),"MMM-dd-yyyy");
+            //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
+        }
+        else
+        {
+            DTInvoice=new java.sql.Date(CurrentTime.getTime().getTime());
+            strDT=utility_functions.convertDateToString(DT,"yyyy-MM-dd HH:mm:ss z");
+            //DTInvoice=utility_functions.convertStringToSQLDate(strDT,context);
+        }
+        int lInvNoFromPending=0,lInvNoFromSales=0,lInvoiceNo=0;
+        if (txtServer.getTag().toString().equals(""))
+        {
+            lInvNoFromPending = utility_functions.getSingleIntValue("MAX(InvoiceNo)","PendingSales","WHERE CAST(CAST(DTEntry_For_InvoiceNo AS DATE) AS DATETIME)='"+DTInvoice.toString()+"'",context);
+            lInvNoFromSales = utility_functions.getSingleIntValue("MAX(InvoiceNo)", "ItemSales", " WHERE DT='" + DTInvoice.toString() + "'",context);
+            if (lInvNoFromPending > lInvNoFromSales)
+                lInvoiceNo = lInvNoFromPending;
+            else
+                lInvoiceNo = lInvNoFromSales;
+
+            lInvoiceNo = lInvoiceNo + 1;
+        }
+        else{
+            lInvoiceNo=Integer.parseInt(txtServer.getTag().toString());
+        }
+        String strOrderFrom_ComputerName="";
+        if (txtOrderFrom.getText().toString().equals("")){
+            strOrderFrom_ComputerName = strDeviceName;
+        }
+        else{
+            strOrderFrom_ComputerName = txtOrderFrom.getText().toString();
+        }
+        txtOrderFrom.setText("");
+        txtOrderDuration.setText("");
+        int iTotalAmount=0;
+        int i;
+        for (i=0;i<data.size();i++){
+            Map<String, String> datanum=(Map<String, String>) data.get(i);
+            int iRate=Integer.parseInt(datanum.get("Rate"));
+            int iQty=Integer.parseInt(datanum.get("Qty"));
+            iTotalAmount=iTotalAmount+(iQty*iRate);
+        }
+        boolean bSTax_Enabled;
+        bSTax_Enabled = utility_functions.getSingleBooleanValue("Sales_Tax_Applicable", "Hall_List", " WHERE " + Integer.toString(iTableNo) + " BETWEEN TableFrom AND TableTo",context);
+        iSalesTax=0;
+        if (bSTax_Enabled){
+            double dSalesTaxPer;
+            dSalesTaxPer = Double.parseDouble(utility_functions.getSingleStringValue("DataValue","GeneralData"," WHERE DataName='SalesTax'",context)) ;
+            iSalesTax=(int) Math.round(iTotalAmount*(dSalesTaxPer /100));
+        }
+
+        boolean bOrderChanged_New=false;
+        String strUserName=utility_functions.getSingleStringValue("UserName","POS_Settings"," WHERE MachineName='"+strDeviceName+"'",context);
+        DBHelper myDBH = new DBHelper();
+        Connection MyCon = myDBH.connectionclass(getApplicationContext());        // Connect to database
+        String strQuery="";
+        int iPS_EntryID=0;
+        PreparedStatement stmt;
+        try {
+            MyCon.setAutoCommit(false);
+            if (lPendingSaleEntryID==0) {
+                strQuery = "INSERT INTO PendingSales(ButtonNumber,Server,TableNo,Payable,Received,Status,UserName,MachineName,SaleType,DrinksUpsize,FriesUpsize,DrinksUpsizeRate,FriesUpsizeRate,InvoiceNo,ManualSTax,STaxAmt,DTEntry_Tab,DT_For_InvoiceNo,DTEntry_For_InvoiceNo,NoofPersons,KS_Remarks) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                stmt = MyCon.prepareStatement(strQuery);
+                stmt.setInt(1, Integer.parseInt((txtTableNo.getText().toString())));
+                stmt.setString(2, txtServer.getText().toString());
+                stmt.setString(3, txtTableNo.getText().toString());
+                stmt.setInt(4, iTotalAmount);
+                stmt.setInt(5, 0);
+                stmt.setInt(6, 0);
+                stmt.setString(7, strUserName);
+                stmt.setString(8, strDeviceName);
+                stmt.setInt(9, iSaleType);
+                stmt.setInt(10, 0);
+                stmt.setInt(11, 0);
+                stmt.setInt(12, 0);
+                stmt.setInt(13, 0);
+                stmt.setInt(14, lInvoiceNo);
+                stmt.setInt(15, 0);
+                stmt.setInt(16, iSalesTax);
+                stmt.setDate(17,sqlDate);
+                stmt.setString(18,strDT);
+                stmt.setDate(19,DTInvoice);
+                stmt.setInt(20,iNoOfPersons);
+                stmt.setString(21,strRemarks);
+                stmt.addBatch();
+                stmt.executeBatch();
+
+                iPS_EntryID = utility_functions.getSingleIntValue(MyCon, "MAX(EntryID)", "PendingSales", " WHERE MachineName='" + strDeviceName + "'", context);
+            }
+            else{
+                strQuery = "UPDATE PendingSales SET Payable=?,STaxAmt=?,NoofPersons=?,KS_Remarks=? WHERE EntryID=?";
+                stmt = MyCon.prepareStatement(strQuery);
+                stmt.setInt(1, iTotalAmount);
+                stmt.setInt(2, iSalesTax);
+                stmt.setInt(3, iNoOfPersons);
+                stmt.setString(4, strRemarks);
+                stmt.setInt(5, lPendingSaleEntryID);
+                stmt.addBatch();
+                stmt.executeBatch();
+                iPS_EntryID=lPendingSaleEntryID;
+            }
+            for (i=0;i<data.size();i++){
+                Map<String, String> datanum=(Map<String, String>) data.get(i);
+                int iEntryID=Integer.parseInt(datanum.get("EntryID"));
+                String strItemName=datanum.get("ItemName");
+                int iFM_EntryID=Integer.parseInt(datanum.get("FM_EntryID"));
+                int iRate=Integer.parseInt(datanum.get("Rate"));
+                int iQty=Integer.parseInt(datanum.get("Qty"));
+                int iPreviouseQty=Integer.parseInt(datanum.get("PreviousQty"));
+                int iTabQty_Saved=Integer.parseInt(datanum.get("TabQty"));
+                String strColumn6Tag=datanum.get("Column6Tag");     //will have "saved" once loaded.
+                int iQtyPrinted=Integer.parseInt(datanum.get("QtyPrinted"));
+                int iTabQty=iTabQty_Saved+iQty-iPreviouseQty;
+                if (iEntryID==0){
+                    strQuery = "INSERT INTO PendingSalesDetail(RefID,Column1,Column1Key,Column1Tag,Column2,Column2Tag,Column3,Column3Tag,Column4,Column4Tag,Column5,Column5Tag,Column6,Column6Tag,QtyPrinted,MachineName_Last,QtyTab,MachineName_Last_Tab) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    stmt = MyCon.prepareStatement(strQuery);
+                    stmt.setInt(1, iPS_EntryID);
+                    stmt.setString(2,strItemName);
+                    stmt.setString(3, Integer.toString(iFM_EntryID)+"'FM");
+                    stmt.setString(4,"");
+                    stmt.setString(5,Integer.toString(iQty));
+                    stmt.setString(6,"FALSE");
+                    stmt.setString(7,Integer.toString(iRate));
+                    stmt.setString(8,"");
+                    stmt.setString(9,"0");
+                    stmt.setString(10,"");
+                    stmt.setString(11,Integer.toString(iQty*iRate));
+                    stmt.setString(12,"");
+                    stmt.setString(13,"");
+                    stmt.setString(14,strColumn6Tag);
+                    stmt.setString(15,Integer.toString(iQtyPrinted));
+                    stmt.setString(16,strDeviceName);
+                    stmt.setString(17,Integer.toString(iQty));
+                    stmt.setString(18,strDeviceName);
+                    stmt.addBatch();
+                    stmt.executeBatch();
+                    bOrderChanged_New=true;
+                }
+                else{
+                    strQuery = "UPDATE PendingSalesDetail SET Column1=?,Column1Key=?,Column1Tag=?,Column2=?,Column2Tag=?,Column3=?,Column3Tag=?,Column4=?,Column4Tag=?,Column5=?,Column5Tag=?,Column6=?,Column6Tag=?,MachineName_Last=?,QtyTab=?,MachineName_Last_Tab=? WHERE EntryID=?";
+                    stmt = MyCon.prepareStatement(strQuery);
+                    stmt.setString(1,strItemName);
+                    stmt.setString(2, Integer.toString(iFM_EntryID)+"'FM");
+                    stmt.setString(3,"");
+                    stmt.setString(4,Integer.toString(iQty));
+                    stmt.setString(5,"FALSE");
+                    stmt.setString(6,Integer.toString(iRate));
+                    stmt.setString(7,"");
+                    stmt.setString(8,"0");
+                    stmt.setString(9,"");
+                    stmt.setString(10,Integer.toString(iQty*iRate));
+                    stmt.setString(11,"");
+                    stmt.setString(12,"");
+                    stmt.setString(13,strColumn6Tag);
+                    stmt.setString(14,strDeviceName);
+                    stmt.setString(15,Integer.toString(iQty));
+                    stmt.setString(16,strDeviceName);
+                    stmt.setInt(17,iEntryID);
+                    stmt.addBatch();
+                    stmt.executeBatch();
+                    if (iQty>iPreviouseQty){
+                        bOrderChanged_New=true;
+                    }
+                }
+
+            }
+            strQuery = "DELETE FROM Tables_Locked WHERE MachineName=?";
+            stmt = MyCon.prepareStatement(strQuery);
+            stmt.setString(1, strDeviceName);
+            stmt.addBatch();
+            stmt.executeBatch();
+            if (bOrderChanged_New){
+                strQuery = "UPDATE PendingSales SET DTEntry_Last=getDate() WHERE EntryID=?";
+                stmt = MyCon.prepareStatement(strQuery);
+                stmt.setInt(1, lPendingSaleEntryID);
+                stmt.addBatch();
+                stmt.executeBatch();
+            }
+            lPendingSaleEntryID = 0;
+
+            MyCon.commit();
+            data.clear();
+            myCursorAdapter.notifyDataSetChanged();
+            txtTableNo.setText("");
+            txtServer.setText("");
+            txtBill5.setText("");
+            txtBill16.setText("");
+            tableData_Obj.iStatus=1;
+            tableData_Obj.iEntryID=iPS_EntryID;
+            //tableData_Obj.btnTable.setBackgroundColor(Color.YELLOW);
+            tableData_Obj.btnTable.setBackgroundResource(R.drawable.btn_yellow);
+
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            Message.message(context,e.toString());
+        }
     }
 }

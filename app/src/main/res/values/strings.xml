@@ -8,6 +8,7 @@
     <string name="order_from">Order From</string>
     <string name="guest_name">Guest Name</string>
     <string name="order_duration">Order Duration</string>
+    <string name="Person_Nos">No. of Persons</string>
     <string name="menu">Menu</string>
     <string name="sub_menu">Sub Menu</string>
     <string name="Booking_Date_Time">Booking Date Time</string>
