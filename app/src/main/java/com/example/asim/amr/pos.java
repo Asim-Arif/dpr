@@ -555,10 +555,11 @@ public class pos extends Activity {
             return;
         }
         int iNoOfPersons=0;
-        if (!txtNoOfPersons.getText().equals(""))
+        String strKS_Remarks="";
+        if (!txtNoOfPersons.getText().toString().equals("")) {
             iNoOfPersons = Integer.parseInt(txtNoOfPersons.getText().toString());
-        String strKS_Remarks=txtNoOfPersons.getTag().toString();
-
+            strKS_Remarks = txtNoOfPersons.getTag().toString();
+        }
         if (txtServer.getText().toString().equals("")){    //New Pending Sale
             String strTableLocked_ComputerName = utility_functions.getSingleStringValue("MachineName","Tables_Locked"," WHERE TableNo='"+strTableNo+"' AND MachineName<>'"+strDeviceName+"'",context);
             if (strTableLocked_ComputerName!="")
@@ -1013,7 +1014,7 @@ public class pos extends Activity {
         // Build the AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
-        builder.setTitle("Enter Number and Text");
+        builder.setTitle("Enter No. of Persons and Remarks");
         builder.setPositiveButton("OK", (dialog, which) -> {
             String strNoOfPersons = txtNoOfPersons.getText().toString();
             String strRemarks = txtRemarks.getText().toString();
