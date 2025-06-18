@@ -616,7 +616,7 @@ public class pos extends Activity {
                 }
             }
             rs.close();
-            query="SELECT EntryID,TableNo,Pending_Table FROM VItemSalesList WHERE (CashRcvd=0 AND (TotalAmount+ServiceCharges+SalesTaxAmt-Discount)>0) AND SaleType NOT IN(2,3,4,5) AND ISNULL(TableNo,'')<>''";
+            query="SELECT EntryID,TableNo,Pending_Table FROM VItemSalesList WHERE (CashRcvd=0 AND (TotalAmount+ServiceCharges+SalesTaxAmt-Discount)>0) AND SaleType NOT IN(2,3,4,5) AND ISNULL(TableNo,'')<>'' AND Credit_Sale=0";
             stmt=MyCon.prepareStatement(query);
             rs=stmt.executeQuery();
             while (rs.next()){
